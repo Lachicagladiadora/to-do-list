@@ -13,17 +13,16 @@
 }
 
 * {
-  /* color: var(--font); */
-  background: #292929;
   padding: 0px;
   margin: 0px;
   box-sizing: border-box;
+  background: #2b2a2a;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }
-
+/* 
 .title {
-  font-family: var(--title);
   font-size: 120px;
   color: #b1f5e7;
   font-weight: lighter;
   text-align: center;
-}
+} */

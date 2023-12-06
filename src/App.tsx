@@ -12,12 +12,11 @@ export const App = () => {
   const [taskItems, setTaskItems] = useState<
     { content: string; done: boolean }[]
   >([]);
-  const [showCompleted, setShowCompleted] = useState(false);
+  const [showCompleted, setShowCompleted] = useState(true);
 
   const createNewTask = (taskContent: string): void => {
     if (!taskItems.find((task) => task.content === taskContent)) {
       setTaskItems([...taskItems, { content: taskContent, done: false }]);
-      // console.log(taskContent)
     }
   };
 
@@ -42,17 +41,26 @@ export const App = () => {
   }, []);
 
   useEffect(() => {
-    // console.log('change')
     localStorage.setItem("TasksList", JSON.stringify(taskItems));
   }, [taskItems]);
 
   return (
     <>
-      <h1 className="title" style={{}}>
-        TO-DO
-        {/* <FontAwesomeIcon icon={faCoffee} /> */}
-      </h1>
-      <div
+      <header style={{ paddingTop: "20px", paddingBottom: "20px" }}>
+        <h1
+          className="title"
+          style={{
+            fontWeight: "bold",
+            textTransform: "capitalize",
+            color: "#48c0ac",
+            textAlign: "center",
+            fontSize: "60px",
+          }}
+        >
+          to-do
+        </h1>
+      </header>
+      <main
         className="wrapper"
         style={{
           margin: "10px auto",
@@ -63,24 +71,32 @@ export const App = () => {
         }}
       >
         <FormTask createNewTask={createNewTask} />
-        <TaskItemList
-          tasks={taskItems}
-          toogleTask={toogleTask}
-          showCompleted={false}
-        />
-        <VisibilityControl
-          isChecked={showCompleted}
-          setShowCompleted={(checked: boolean) => setShowCompleted(checked)}
-          cleanTasks={cleanTasks}
-        />
-        {showCompleted === true && (
+        <section
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            flex: "1",
+          }}
+        >
+          {showCompleted && (
+            <TaskItemList
+              tasks={taskItems}
+              toogleTask={toogleTask}
+              showCompleted={showCompleted}
+            />
+          )}
           <TaskItemList
             tasks={taskItems}
             toogleTask={toogleTask}
-            showCompleted={showCompleted}
+            showCompleted={false}
           />
-        )}
-      </div>
+          {/* <VisibilityControl
+            isChecked={showCompleted}
+            setShowCompleted={(checked: boolean) => setShowCompleted(checked)}
+            cleanTasks={cleanTasks}
+          /> */}
+        </section>
+      </main>
       <Footer />
     </>
   );
