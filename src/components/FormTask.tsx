@@ -25,8 +25,8 @@ export const FormTask = ({ createNewTask, style }: FormTaskProps) => {
       style={{
         width: "100%",
         display: "flex",
-        justifyContent: "space-around",
-        gap: "20px",
+        justifyContent: "space-between",
+        gap: "10px",
         ...style,
       }}
     >
@@ -35,10 +35,16 @@ export const FormTask = ({ createNewTask, style }: FormTaskProps) => {
         onChange={(event) =>
           setNewTaskValue((event.target as HTMLInputElement).value)
         }
-        placeholder="write a new tag"
-        style={{ padding: "10px 20px", width: "80%" }}
+        placeholder="Write a new to-do"
+        style={{ padding: "10px 20px", flex: "1" }}
       />
-      <Button style={{ padding: "10px 20px", color: "rgb(11, 93, 62)" }}>
+      <Button
+        style={{
+          padding: "10px 20px",
+          width: "91px",
+          color: "rgb(11, 93, 62)",
+        }}
+      >
         Save{" "}
         <FontAwesomeIcon icon={faSave} style={{ background: "transparent" }} />
       </Button>
