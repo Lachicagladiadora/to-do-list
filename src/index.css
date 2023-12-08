@@ -16,13 +16,15 @@
   padding: 0px;
   margin: 0px;
   box-sizing: border-box;
-  background: #2b2a2a;
   /* font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif; */
 }
-/* 
-.title {
-  font-size: 120px;
-  color: #b1f5e7;
-  font-weight: lighter;
-  text-align: center;
-} */
+
+.wrapper-general {
+  background: #2b2a2a;
+  height: 100vh;
+  /* display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  position: relative; */
+}

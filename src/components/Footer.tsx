@@ -1,7 +1,12 @@
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { CSSProperties } from "react";
 
-export const Footer = () => {
+type FooterProps = {
+  style?: CSSProperties;
+};
+
+export const Footer = ({ style }: FooterProps) => {
   return (
     <footer
       style={{
@@ -16,6 +21,7 @@ export const Footer = () => {
         position: "absolute",
         bottom: "0px",
         fontFamily: "monospace",
+        ...style,
       }}
     >
       <span

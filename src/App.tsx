@@ -49,50 +49,107 @@ export const App = () => {
     localStorage.setItem("TasksList", JSON.stringify(taskItems));
   }, [taskItems]);
 
-  const closeShow = () => {
-    console.log("clear!!!!");
-  };
-
   return (
-    <>
-      <header style={{ paddingTop: "20px", paddingBottom: "20px" }}>
+    <div
+      style={{
+        height: "100%",
+        display: "grid",
+        gridTemplateAreas: "header main footer'/auto",
+        gap: "0px",
+        border: "solid 2px orange",
+      }}
+    >
+      <header
+        style={{
+          paddingTop: "20px",
+          paddingBottom: "20px",
+          background: "black",
+          position: "absolute",
+          top: "0px",
+          width: "100%",
+          gridArea: "header",
+          border: "solid 2px white",
+        }}
+      >
         <h1
-          className="title"
           style={{
             fontWeight: "bold",
             textTransform: "capitalize",
             color: "#48c0ac",
             textAlign: "center",
             fontSize: "60px",
+            zIndex: "2",
           }}
         >
           to-do
         </h1>
       </header>
       <main
-        className="wrapper"
+        // className="wrapper"
         style={{
-          margin: "10px auto",
-          maxWidth: "800px",
+          margin: "0px auto",
+          width: "100%",
+          // height: "80vh",
+          // maxWidth: "900px",
           display: "flex",
           flexDirection: "column",
           gap: "50px",
+          alignItems: "center",
+          flex: "1",
+          // background: "#2b2a2a",
+          gridArea: "main",
+          border: "solid 2px violet",
+          position: "absolute",
+          top: "112px",
         }}
       >
-        <FormTask createNewTask={createNewTask} />
+        <section
+          style={{
+            width: "100vw",
+            height: "80px",
+            background: "yellow",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            paddingTop: "100px",
+            position: "absolute",
+            // top: "112px",
+          }}
+        >
+          <FormTask
+            createNewTask={createNewTask}
+            style={{
+              // background: "linearGradient( 0deg, black, pink)",
+              maxWidth: "900px",
+              border: "solid 2px blue",
+              // margin: "0px auto",
+            }}
+          />
+        </section>
         <section
           style={{
             display: "flex",
             flexDirection: "column",
-            gap: "50px",
-            // justifyContent: "space-between",
-            // flex: "1",
+            gap: "26px",
+            maxWidth: "900px",
+            height: "60vh",
+            border: "solid 2px green",
+            position: "absolute",
+            top: "230px",
+            // background: "red",
+            // border: "solid 2px yellowgreen",
           }}
         >
-          <div style={{ height: "50%", position: "relative" }}>
+          <div
+            style={{
+              position: "relative",
+              height: "32vh",
+              border: "solid 2px red",
+            }}
+          >
             {taskItems.length > 0 && (
               <Button
-                onClick={closeShow}
+                onClick={cleanTasks}
                 style={{ position: "absolute", top: "0px", right: "0px" }}
               >
                 <FontAwesomeIcon
@@ -100,7 +157,8 @@ export const App = () => {
                   style={{
                     background: "transparent",
                   }}
-                />
+                />{" "}
+                Delete to-do completed
               </Button>
             )}
             {showCompleted && (
@@ -111,7 +169,7 @@ export const App = () => {
               />
             )}
           </div>
-          <div style={{ height: "50%" }}>
+          <div style={{ height: "32vh", border: "solid 2px red" }}>
             <TaskItemList
               tasks={taskItems}
               toogleTask={toogleTask}
@@ -120,7 +178,7 @@ export const App = () => {
           </div>
         </section>
       </main>
-      <Footer />
-    </>
+      <Footer style={{ gridArea: "footer" }} />
+    </div>
   );
 };
