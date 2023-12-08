@@ -1,17 +1,13 @@
 import { useEffect, useState } from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faCoffee,
-  faTrash,
-  faTrashAlt,
-} from "@fortawesome/free-solid-svg-icons";
+import { faListCheck, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 
 import { FormTask } from "./components/FormTask";
 import { TaskItemList } from "./components/TaskItemList";
-import { VisibilityControl } from "./components/VisibilityControl";
 import { Footer } from "./components/Footer";
 import { Button } from "./components/Button";
+import { faCheckSquare } from "@fortawesome/free-regular-svg-icons/faCheckSquare";
 
 export const App = () => {
   const [taskItems, setTaskItems] = useState<
@@ -69,19 +65,20 @@ export const App = () => {
           width: "100%",
           gridArea: "header",
           border: "solid 2px white",
+          // fontSize: "60px",
+          color: "#48c0ac",
         }}
       >
         <h1
           style={{
+            fontSize: "60px",
             fontWeight: "bold",
             textTransform: "capitalize",
-            color: "#48c0ac",
             textAlign: "center",
-            fontSize: "60px",
             zIndex: "2",
           }}
         >
-          to-do
+          <FontAwesomeIcon icon={faListCheck} /> to-do
         </h1>
       </header>
       <main
