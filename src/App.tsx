@@ -1,12 +1,17 @@
 import { useEffect, useState } from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCoffee } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCoffee,
+  faTrash,
+  faTrashAlt,
+} from "@fortawesome/free-solid-svg-icons";
 
 import { FormTask } from "./components/FormTask";
 import { TaskItemList } from "./components/TaskItemList";
 import { VisibilityControl } from "./components/VisibilityControl";
 import { Footer } from "./components/Footer";
+import { Button } from "./components/Button";
 
 export const App = () => {
   const [taskItems, setTaskItems] = useState<
@@ -44,6 +49,10 @@ export const App = () => {
     localStorage.setItem("TasksList", JSON.stringify(taskItems));
   }, [taskItems]);
 
+  const closeShow = () => {
+    console.log("clear!!!!");
+  };
+
   return (
     <>
       <header style={{ paddingTop: "20px", paddingBottom: "20px" }}>
@@ -74,27 +83,41 @@ export const App = () => {
         <section
           style={{
             display: "flex",
-            justifyContent: "space-between",
-            flex: "1",
+            flexDirection: "column",
+            gap: "50px",
+            // justifyContent: "space-between",
+            // flex: "1",
           }}
         >
-          {showCompleted && (
+          <div style={{ height: "50%", position: "relative" }}>
+            {taskItems.length > 0 && (
+              <Button
+                onClick={closeShow}
+                style={{ position: "absolute", top: "0px", right: "0px" }}
+              >
+                <FontAwesomeIcon
+                  icon={faTrashAlt}
+                  style={{
+                    background: "transparent",
+                  }}
+                />
+              </Button>
+            )}
+            {showCompleted && (
+              <TaskItemList
+                tasks={taskItems}
+                toogleTask={toogleTask}
+                showCompleted={showCompleted}
+              />
+            )}
+          </div>
+          <div style={{ height: "50%" }}>
             <TaskItemList
               tasks={taskItems}
               toogleTask={toogleTask}
-              showCompleted={showCompleted}
+              showCompleted={false}
             />
-          )}
-          <TaskItemList
-            tasks={taskItems}
-            toogleTask={toogleTask}
-            showCompleted={false}
-          />
-          {/* <VisibilityControl
-            isChecked={showCompleted}
-            setShowCompleted={(checked: boolean) => setShowCompleted(checked)}
-            cleanTasks={cleanTasks}
-          /> */}
+          </div>
         </section>
       </main>
       <Footer />
