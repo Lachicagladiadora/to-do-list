@@ -1,20 +1,22 @@
 import { TaskItem } from "./TaskItem";
 
-type TaskItemListProps = {
-  tasks: any;
-  toogleTask: (task: any) => void;
-  showCompleted: boolean;
-  title?: string;
+type todoType = {
+  content: string;
+  done: boolean;
 };
 
-export const TaskItemList = ({
-  title,
+type TodoItemListProps = {
+  tasks: todoType[];
+  toogleTask: (task: todoType) => void;
+  showCompleted: boolean;
+};
+
+export const TodoItemList = ({
   tasks,
   toogleTask,
   showCompleted = false,
-}: TaskItemListProps) => {
+}: TodoItemListProps) => {
   const taskUnique = (doneValue: boolean) => {
-    console.log(doneValue);
     return tasks
       .filter((task: { done: boolean }) => task.done === doneValue)
       .map((task: { content: string; done: boolean }) => (
@@ -33,15 +35,6 @@ export const TaskItemList = ({
     );
   return (
     <div className="wrapper-task">
-      {/* <h2
-        style={{
-          textAlign:'center',
-          fontWeight:'bolder',
-          color:'#48c0ac',
-        }}
-      >
-        Tasks {title}
-      </h2> */}
       <ul>{taskUnique(showCompleted)}</ul>
     </div>
   );

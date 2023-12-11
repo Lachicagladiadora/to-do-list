@@ -4,45 +4,50 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faListCheck, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 
 import { FormTask } from "./components/FormTask";
-import { TaskItemList } from "./components/TaskItemList";
+import { TodoItemList } from "./components/TaskItemList";
 import { Footer } from "./components/Footer";
 import { Button } from "./components/Button";
 
+type todoType = {
+  content: string;
+  done: boolean;
+};
+
 export const App = () => {
-  const [taskItems, setTaskItems] = useState<
+  const [todoItems, setTodoItems] = useState<
     { content: string; done: boolean }[]
   >([]);
   const [showCompleted, setShowCompleted] = useState(true);
 
-  const createNewTask = (taskContent: string): void => {
-    if (!taskItems.find((task) => task.content === taskContent)) {
-      setTaskItems([...taskItems, { content: taskContent, done: false }]);
+  const createNewTodo = (todoContent: string): void => {
+    if (!todoItems.find((task) => task.content === todoContent)) {
+      setTodoItems([...todoItems, { content: todoContent, done: false }]);
     }
   };
 
-  const toogleTask = (task: any) => {
-    setTaskItems(
-      taskItems.map((t) =>
+  const toogleTodo = (task: todoType) => {
+    setTodoItems(
+      todoItems.map((t) =>
         t.content === task.content ? { ...t, done: !t.done } : t
       )
     );
   };
 
-  const cleanTasks = () => {
-    setTaskItems(taskItems.filter((task) => !task.done));
-    setShowCompleted(false);
+  const removeAllCompletedTodos = () => {
+    setTodoItems(todoItems.filter((task) => !task.done));
+    setShowCompleted(true);
   };
 
   useEffect(() => {
     const data = localStorage.getItem("TasksList");
     if (data) {
-      setTaskItems(JSON.parse(data));
+      setTodoItems(JSON.parse(data));
     }
   }, []);
 
   useEffect(() => {
-    localStorage.setItem("TasksList", JSON.stringify(taskItems));
-  }, [taskItems]);
+    localStorage.setItem("TasksList", JSON.stringify(todoItems));
+  }, [todoItems]);
 
   return (
     <div
@@ -51,7 +56,6 @@ export const App = () => {
         display: "grid",
         gridTemplateAreas: "header main footer'/auto",
         gap: "0px",
-        border: "solid 2px orange",
       }}
     >
       <header
@@ -63,8 +67,6 @@ export const App = () => {
           top: "0px",
           width: "100%",
           gridArea: "header",
-          border: "solid 2px white",
-          // fontSize: "60px",
           color: "#48c0ac",
         }}
       >
@@ -81,20 +83,15 @@ export const App = () => {
         </h1>
       </header>
       <main
-        // className="wrapper"
         style={{
           margin: "0px auto",
           width: "100%",
-          // height: "80vh",
-          // maxWidth: "900px",
           display: "flex",
           flexDirection: "column",
           gap: "50px",
           alignItems: "center",
           flex: "1",
-          // background: "#2b2a2a",
           gridArea: "main",
-          border: "solid 2px violet",
           position: "absolute",
           top: "112px",
         }}
@@ -103,22 +100,19 @@ export const App = () => {
           style={{
             width: "100vw",
             height: "80px",
-            background: "yellow",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
             paddingTop: "100px",
             position: "absolute",
-            // top: "112px",
+            top: "-15px",
+            background: "linear-gradient(0deg,#2b2a2a 0%, black 100%)",
           }}
         >
           <FormTask
-            createNewTask={createNewTask}
+            createNewTask={createNewTodo}
             style={{
-              // background: "linearGradient( 0deg, black, pink)",
               maxWidth: "900px",
-              border: "solid 2px blue",
-              // margin: "0px auto",
             }}
           />
         </section>
@@ -129,24 +123,29 @@ export const App = () => {
             gap: "26px",
             maxWidth: "900px",
             height: "60vh",
-            border: "solid 2px green",
             position: "absolute",
-            top: "230px",
-            // background: "red",
-            // border: "solid 2px yellowgreen",
+            top: "160px",
+            color: "#48c0ac",
           }}
         >
           <div
             style={{
               position: "relative",
+              display: "flex",
+              flexDirection: "column",
               height: "32vh",
-              border: "solid 2px red",
+              maxWidth: "900px",
+              border: "solid 1px #0b5d3e",
+              overflowY: "scroll",
+              padding: "20px",
+              paddingTop: "20px",
+              borderRadius: "15px",
             }}
           >
-            {taskItems.length > 0 && (
+            {todoItems.length > 0 && (
               <Button
-                onClick={cleanTasks}
-                style={{ position: "absolute", top: "0px", right: "0px" }}
+                onClick={removeAllCompletedTodos}
+                style={{ position: "sticky" }}
               >
                 <FontAwesomeIcon
                   icon={faTrashAlt}
@@ -154,21 +153,33 @@ export const App = () => {
                     background: "transparent",
                   }}
                 />{" "}
-                Delete to-do completed
+                Delete all completed
               </Button>
             )}
             {showCompleted && (
-              <TaskItemList
-                tasks={taskItems}
-                toogleTask={toogleTask}
+              <TodoItemList
+                tasks={todoItems}
+                toogleTask={toogleTodo}
                 showCompleted={showCompleted}
               />
             )}
           </div>
-          <div style={{ height: "32vh", border: "solid 2px red" }}>
-            <TaskItemList
-              tasks={taskItems}
-              toogleTask={toogleTask}
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              position: "relative",
+              height: "32vh",
+              maxWidth: "900px",
+              border: "solid 1px #0b5d3e",
+              overflowY: "scroll",
+              padding: "20px",
+              borderRadius: "15px",
+            }}
+          >
+            <TodoItemList
+              tasks={todoItems}
+              toogleTask={toogleTodo}
               showCompleted={false}
             />
           </div>
