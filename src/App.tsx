@@ -54,13 +54,13 @@ export const App = () => {
       style={{
         height: "100%",
         display: "grid",
-        gridTemplateAreas: "header main footer'/auto",
+        gridTemplateAreas: "header main footer",
         gap: "0px",
       }}
     >
       <header
         style={{
-          paddingTop: "20px",
+          paddingTop: "40px",
           paddingBottom: "20px",
           background: "black",
           position: "absolute",
@@ -88,43 +88,43 @@ export const App = () => {
           width: "100%",
           display: "flex",
           flexDirection: "column",
-          gap: "50px",
+          gap: "20px",
           alignItems: "center",
           flex: "1",
           gridArea: "main",
+          // marginBottom: "180px",
           position: "absolute",
-          top: "112px",
+          top: "90px",
         }}
       >
         <section
           style={{
-            width: "100vw",
+            width: "100%",
             height: "80px",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            paddingTop: "100px",
+            paddingTop: "80px",
             position: "absolute",
-            top: "-15px",
-            background: "linear-gradient(0deg,#2b2a2a 0%, black 100%)",
+            top: "-10px",
+            background:
+              "linear-gradient(0deg,#2b2a2a -4%, black 64%, transparent -5%)",
           }}
         >
           <FormTask
             createNewTask={createNewTodo}
-            style={{
-              maxWidth: "900px",
-            }}
+            style={{ maxWidth: "900px" }}
           />
         </section>
         <section
           style={{
             display: "flex",
             flexDirection: "column",
-            gap: "26px",
+            gap: "16px",
             maxWidth: "900px",
-            height: "60vh",
+            height: "56vh",
             position: "absolute",
-            top: "160px",
+            top: "120px",
             color: "#48c0ac",
           }}
         >
@@ -133,7 +133,7 @@ export const App = () => {
               position: "relative",
               display: "flex",
               flexDirection: "column",
-              height: "32vh",
+              height: "50%",
               maxWidth: "900px",
               border: "solid 1px #0b5d3e",
               overflowY: "scroll",
@@ -169,7 +169,7 @@ export const App = () => {
               display: "flex",
               flexDirection: "column",
               position: "relative",
-              height: "32vh",
+              height: "50%",
               maxWidth: "900px",
               border: "solid 1px #0b5d3e",
               overflowY: "scroll",
@@ -185,7 +185,9 @@ export const App = () => {
           </div>
         </section>
       </main>
-      <Footer style={{ gridArea: "footer" }} />
+      <Footer
+        style={{ gridArea: "footer", position: "fixed", bottom: "0px" }}
+      />
     </div>
   );
 };
