@@ -7,7 +7,6 @@ import { FormTask } from "./components/FormTask";
 import { TaskItemList } from "./components/TaskItemList";
 import { Footer } from "./components/Footer";
 import { Button } from "./components/Button";
-import { faCheckSquare } from "@fortawesome/free-regular-svg-icons/faCheckSquare";
 
 export const App = () => {
   const [taskItems, setTaskItems] = useState<
