@@ -16,6 +16,7 @@
   padding: 0px;
   margin: 0px;
   box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
   /* background: black; */
   /* font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif; */
 }
@@ -23,9 +24,4 @@
 .wrapper-general {
   background: #2b2a2a;
   height: 100vh;
-  /* display: flex;
-  flex: 1;
-  flex-direction: column;
-  justify-content: center;
-  position: relative; */
 }

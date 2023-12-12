@@ -1,12 +1,19 @@
 import { useEffect, useState } from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faListCheck, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
+import {
+  faEye,
+  faListCheck,
+  faTrashAlt,
+} from "@fortawesome/free-solid-svg-icons";
 
 import { FormTask } from "./components/FormTask";
 import { TodoItemList } from "./components/TaskItemList";
 import { Footer } from "./components/Footer";
 import { Button } from "./components/Button";
+
+const HeaderHeigthPixels = 60;
+const FooterHeigthPixels = 60;
 
 type todoType = {
   content: string;
@@ -14,59 +21,66 @@ type todoType = {
 };
 
 export const App = () => {
-  const [todoItems, setTodoItems] = useState<
+  const [todos, setTodos] = useState<{ content: string; done: boolean }[]>([]);
+  const [procecedTodos, setProcecedTodos] = useState<
     { content: string; done: boolean }[]
   >([]);
   const [showCompleted, setShowCompleted] = useState(true);
 
   const createNewTodo = (todoContent: string): void => {
-    if (!todoItems.find((task) => task.content === todoContent)) {
-      setTodoItems([...todoItems, { content: todoContent, done: false }]);
+    if (!todos.find((task) => task.content === todoContent)) {
+      setTodos([...todos, { content: todoContent, done: false }]);
+      // setProcecedTodos([...todos, { content: todoContent, done: false }])
     }
   };
 
   const toogleTodo = (task: todoType) => {
-    setTodoItems(
-      todoItems.map((t) =>
+    setTodos(
+      todos.map((t) =>
         t.content === task.content ? { ...t, done: !t.done } : t
       )
     );
   };
 
   const removeAllCompletedTodos = () => {
-    setTodoItems(todoItems.filter((task) => !task.done));
-    setShowCompleted(true);
+    setTodos(todos.filter((task) => !task.done));
+    setShowCompleted(false);
+  };
+
+  const onFilterNotes = (query: string) => {
+    const filteredNotes = todos.filter((cur) => cur.content.includes(query));
+    setProcecedTodos(filteredNotes);
   };
 
   useEffect(() => {
     const data = localStorage.getItem("TasksList");
     if (data) {
-      setTodoItems(JSON.parse(data));
+      setTodos(JSON.parse(data));
     }
   }, []);
 
   useEffect(() => {
-    localStorage.setItem("TasksList", JSON.stringify(todoItems));
-  }, [todoItems]);
+    localStorage.setItem("TasksList", JSON.stringify(todos));
+  }, [todos]);
+
+  useEffect(() => {
+    setProcecedTodos(todos);
+  }, [todos]);
 
   return (
     <div
       style={{
         height: "100%",
-        display: "grid",
-        gridTemplateAreas: "header main footer",
-        gap: "0px",
+        display: "flex",
+        flexDirection: "column",
       }}
     >
       <header
         style={{
-          paddingTop: "40px",
-          paddingBottom: "20px",
-          background: "black",
-          position: "absolute",
-          top: "0px",
           width: "100%",
-          gridArea: "header",
+          height: `${HeaderHeigthPixels}px`,
+          padding: "0 30px",
+          background: "black",
           color: "#48c0ac",
         }}
       >
@@ -76,7 +90,6 @@ export const App = () => {
             fontWeight: "bold",
             textTransform: "capitalize",
             textAlign: "center",
-            zIndex: "2",
           }}
         >
           <FontAwesomeIcon icon={faListCheck} /> to-do
@@ -84,110 +97,105 @@ export const App = () => {
       </header>
       <main
         style={{
-          margin: "0px auto",
+          border: "solid 2px green",
           width: "100%",
-          display: "flex",
-          flexDirection: "column",
+          height: `calc(100vh - ${HeaderHeigthPixels + FooterHeigthPixels}px)`,
+          display: "grid",
+          gridTemplateColumns: "1fr",
+          gridTemplateRows: "auto auto 1fr",
           gap: "20px",
-          alignItems: "center",
-          flex: "1",
-          gridArea: "main",
-          // marginBottom: "180px",
-          position: "absolute",
-          top: "90px",
         }}
       >
+        {/* filter notes */}
         <section
           style={{
+            margin: "auto",
+            maxWidth: "900px",
             width: "100%",
             height: "80px",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            paddingTop: "80px",
-            position: "absolute",
-            top: "-10px",
             background:
               "linear-gradient(0deg,#2b2a2a -4%, black 64%, transparent -5%)",
           }}
         >
           <FormTask
             createNewTask={createNewTodo}
-            style={{ maxWidth: "900px" }}
+            onChangeInputCallback={onFilterNotes}
           />
         </section>
+        {/* notes options */}
         <section
           style={{
+            margin: "auto",
             display: "flex",
-            flexDirection: "column",
-            gap: "16px",
+            justifyContent: "flex-end",
+            width: "100%",
             maxWidth: "900px",
-            height: "56vh",
-            position: "absolute",
-            top: "120px",
             color: "#48c0ac",
+            gap: "20px",
           }}
         >
-          <div
-            style={{
-              position: "relative",
-              display: "flex",
-              flexDirection: "column",
-              height: "50%",
-              maxWidth: "900px",
-              border: "solid 1px #0b5d3e",
-              overflowY: "scroll",
-              padding: "20px",
-              paddingTop: "20px",
-              borderRadius: "15px",
-            }}
-          >
-            {todoItems.length > 0 && (
-              <Button
-                onClick={removeAllCompletedTodos}
-                style={{ position: "sticky" }}
-              >
-                <FontAwesomeIcon
-                  icon={faTrashAlt}
-                  style={{
-                    background: "transparent",
-                  }}
-                />{" "}
-                Delete all completed
-              </Button>
-            )}
-            {showCompleted && (
-              <TodoItemList
-                tasks={todoItems}
-                toogleTask={toogleTodo}
-                showCompleted={showCompleted}
-              />
-            )}
-          </div>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              position: "relative",
-              height: "50%",
-              maxWidth: "900px",
-              border: "solid 1px #0b5d3e",
-              overflowY: "scroll",
-              padding: "20px",
-              borderRadius: "15px",
-            }}
-          >
+          {procecedTodos.length !== todos.length && (
+            <p>
+              You have {procecedTodos.length} of {todos.length}
+            </p>
+          )}
+          {procecedTodos.length === todos.length && (
+            <p>You have {todos.length} todos</p>
+          )}
+          <Button onClick={() => setShowCompleted((prev) => !prev)}>
+            <FontAwesomeIcon
+              icon={faEye}
+              style={{
+                background: "transparent",
+              }}
+            />{" "}
+            {showCompleted ? "Hide completed" : "Show completed"}
+          </Button>
+          {todos.length > 0 && (
+            <Button onClick={removeAllCompletedTodos}>
+              <FontAwesomeIcon
+                icon={faTrashAlt}
+                style={{
+                  background: "transparent",
+                }}
+              />{" "}
+              Delete all completed
+            </Button>
+          )}
+        </section>
+        {/* notes */}
+        <section
+          style={{
+            margin: "0px auto",
+            display: "flex",
+            flexDirection: "column",
+            maxWidth: "900px",
+            color: "white",
+            fontSize: "24px",
+          }}
+        >
+          {!todos.length && <p>You do not have todos yet</p>}
+          {todos.length && !procecedTodos.length && (
+            <p>There is no todos with the query you wrote</p>
+          )}
+          <TodoItemList
+            tasks={procecedTodos}
+            toogleTask={toogleTodo}
+            showCompleted={false}
+          />
+          {showCompleted && (
             <TodoItemList
-              tasks={todoItems}
+              tasks={procecedTodos}
               toogleTask={toogleTodo}
-              showCompleted={false}
+              showCompleted={showCompleted}
             />
-          </div>
+          )}
         </section>
       </main>
-      <Footer
-        style={{ gridArea: "footer", position: "fixed", bottom: "0px" }}
-      />
+      <Footer style={{ height: `${FooterHeigthPixels}px` }} />
     </div>
   );
 };

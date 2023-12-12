@@ -17,15 +17,25 @@ export const TodoItemList = ({
   showCompleted = false,
 }: TodoItemListProps) => {
   const taskUnique = (doneValue: boolean) => {
-    return tasks
-      .filter((task: { done: boolean }) => task.done === doneValue)
-      .map((task: { content: string; done: boolean }) => (
-        <TaskItem
-          task={task}
-          key={Math.floor(Math.random() * 1000000).toString()}
-          toogleTask={toogleTask}
-        />
-      ));
+    return (
+      <ul
+        style={{
+          display: "grid",
+          gridTemplateColumns: "1fr",
+          gap: "20px",
+        }}
+      >
+        {tasks
+          .filter((task: { done: boolean }) => task.done === doneValue)
+          .map((task: { content: string; done: boolean }) => (
+            <TaskItem
+              task={task}
+              key={Math.floor(Math.random() * 1000000).toString()}
+              toogleTask={toogleTask}
+            />
+          ))}
+      </ul>
+    );
   };
   if (!taskUnique)
     return (

@@ -6,10 +6,15 @@ import { faSave } from "@fortawesome/free-solid-svg-icons";
 
 type FormTaskProps = {
   createNewTask: (newTaskValue: string) => void;
+  onChangeInputCallback: (newValue: string) => void;
   style?: CSSProperties;
 };
 
-export const FormTask = ({ createNewTask, style }: FormTaskProps) => {
+export const FormTask = ({
+  createNewTask,
+  onChangeInputCallback,
+  style,
+}: FormTaskProps) => {
   const [newTaskValue, setNewTaskValue] = useState("");
 
   const onSubmit = (_event: { preventDefault: () => void }) => {
@@ -32,20 +37,27 @@ export const FormTask = ({ createNewTask, style }: FormTaskProps) => {
     >
       <Input
         value={newTaskValue}
-        onChange={(event) =>
-          setNewTaskValue((event.target as HTMLInputElement).value)
-        }
+        onChange={(event) => {
+          const newValue = (event.target as HTMLInputElement).value;
+          setNewTaskValue(newValue);
+          onChangeInputCallback(newValue);
+        }}
         placeholder="Write a new to-do"
-        style={{ padding: "10px 20px", flex: "1" }}
+        style={{
+          padding: "10px 20px",
+          // flex: "1",
+          fontSize: "20px",
+          width: "100%",
+        }}
       />
       <Button
         style={{
           padding: "10px 20px",
           width: "91px",
           color: "rgb(11, 93, 62)",
+          fontSize: "20px",
         }}
       >
-        Save{" "}
         <FontAwesomeIcon icon={faSave} style={{ background: "transparent" }} />
       </Button>
     </form>

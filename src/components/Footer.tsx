@@ -18,19 +18,11 @@ export const Footer = ({ style }: FooterProps) => {
         justifyContent: "center",
         padding: "20px",
         color: "#d8fcf6ca",
-        position: "absolute",
-        bottom: "0px",
         fontFamily: "monospace",
         ...style,
       }}
     >
-      <span
-        style={{
-          background: "transparent",
-        }}
-      >
-        by Lachicagladiadora
-      </span>
+      <span>by Lachicagladiadora</span>
       <a
         href="https://github.com/Lachicagladiadora"
         target="_blank"
