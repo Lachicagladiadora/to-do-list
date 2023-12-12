@@ -1,23 +1,28 @@
-type TaskItemProps = {
-  task: {
+type todoType = {
+  content: string;
+  done: boolean;
+};
+
+type TodoProps = {
+  todo: {
     content: string;
     done: boolean;
   };
-  toogleTask: (task: any) => void;
+  toogleTodo: (todo: todoType) => void;
 };
 
-export const TaskItem = ({ task, toogleTask }: TaskItemProps) => {
+export const TaskItem = ({ todo, toogleTodo }: TodoProps) => {
   return (
     <li style={{ listStyle: "none" }}>
       <input
         type="checkbox"
-        checked={task.done}
-        onChange={() => toogleTask(task)}
+        checked={todo.done}
+        onChange={() => toogleTodo(todo)}
         style={{
           color: "white",
         }}
       />{" "}
-      {task.content}
+      {todo.content}
     </li>
   );
 };

@@ -12,7 +12,6 @@ import { FormTask } from "./components/FormTask";
 import { TodoItemList } from "./components/TaskItemList";
 import { Footer } from "./components/Footer";
 import { Button } from "./components/Button";
-import { faEarDeaf } from "@fortawesome/free-solid-svg-icons/faEarDeaf";
 
 const HeaderHeigthPixels = 140;
 const FooterHeigthPixels = 60;
@@ -32,7 +31,6 @@ export const App = () => {
   const createNewTodo = (todoContent: string): void => {
     if (!todos.find((task) => task.content === todoContent)) {
       setTodos([...todos, { content: todoContent, done: false }]);
-      // setProcecedTodos([...todos, { content: todoContent, done: false }])
     }
   };
 
@@ -82,7 +80,6 @@ export const App = () => {
           width: "100%",
           height: `${HeaderHeigthPixels}px`,
           padding: "0 30px",
-          // background: "black",
           color: "#48c0ac",
         }}
       >
@@ -101,7 +98,6 @@ export const App = () => {
       </header>
       <main
         style={{
-          // border: "solid 2px green",
           width: "100%",
           height: `calc(100vh - ${HeaderHeigthPixels + FooterHeigthPixels}px)`,
           display: "grid",
@@ -133,6 +129,7 @@ export const App = () => {
             margin: "auto",
             display: "flex",
             justifyContent: "flex-end",
+            alignItems: "center",
             width: "100%",
             maxWidth: "900px",
             color: "#48c0ac",
@@ -141,11 +138,11 @@ export const App = () => {
         >
           {procecedTodos.length !== todos.length && (
             <p>
-              You have {procecedTodos.length} of {todos.length}
+              You have {procecedTodos.length} of {todos.length} to-dos
             </p>
           )}
           {procecedTodos.length === todos.length && (
-            <p>You have {todos.length} todos</p>
+            <p>You have {todos.length} to-dos</p>
           )}
           <Button onClick={() => setShowCompleted((prev) => !prev)}>
             <FontAwesomeIcon
@@ -184,14 +181,14 @@ export const App = () => {
             <p>There is no todos with the query you wrote</p>
           )}
           <TodoItemList
-            tasks={procecedTodos}
-            toogleTask={toogleTodo}
+            todo={procecedTodos}
+            toogleTodo={toogleTodo}
             showCompleted={false}
           />
           {showCompleted && (
             <TodoItemList
-              tasks={procecedTodos}
-              toogleTask={toogleTodo}
+              todo={procecedTodos}
+              toogleTodo={toogleTodo}
               showCompleted={showCompleted}
             />
           )}

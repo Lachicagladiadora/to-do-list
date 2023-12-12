@@ -45,7 +45,6 @@ export const FormTask = ({
         placeholder="Write a new to-do"
         style={{
           padding: "10px 20px",
-          // flex: "1",
           fontSize: "20px",
           width: "100%",
         }}

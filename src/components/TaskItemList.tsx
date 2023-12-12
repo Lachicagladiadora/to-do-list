@@ -6,14 +6,14 @@ type todoType = {
 };
 
 type TodoItemListProps = {
-  tasks: todoType[];
-  toogleTask: (task: todoType) => void;
+  todo: todoType[];
+  toogleTodo: (todo: todoType) => void;
   showCompleted: boolean;
 };
 
 export const TodoItemList = ({
-  tasks,
-  toogleTask,
+  todo,
+  toogleTodo,
   showCompleted = false,
 }: TodoItemListProps) => {
   const taskUnique = (doneValue: boolean) => {
@@ -25,13 +25,13 @@ export const TodoItemList = ({
           gap: "20px",
         }}
       >
-        {tasks
-          .filter((task: { done: boolean }) => task.done === doneValue)
-          .map((task: { content: string; done: boolean }) => (
+        {todo
+          .filter((todo: { done: boolean }) => todo.done === doneValue)
+          .map((todo: { content: string; done: boolean }) => (
             <TaskItem
-              task={task}
+              todo={todo}
               key={Math.floor(Math.random() * 1000000).toString()}
-              toogleTask={toogleTask}
+              toogleTodo={toogleTodo}
             />
           ))}
       </ul>
