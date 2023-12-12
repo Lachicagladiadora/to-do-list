@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faEye,
+  faEyeSlash,
   faListCheck,
   faTrashAlt,
 } from "@fortawesome/free-solid-svg-icons";
@@ -11,8 +12,9 @@ import { FormTask } from "./components/FormTask";
 import { TodoItemList } from "./components/TaskItemList";
 import { Footer } from "./components/Footer";
 import { Button } from "./components/Button";
+import { faEarDeaf } from "@fortawesome/free-solid-svg-icons/faEarDeaf";
 
-const HeaderHeigthPixels = 60;
+const HeaderHeigthPixels = 140;
 const FooterHeigthPixels = 60;
 
 type todoType = {
@@ -80,24 +82,26 @@ export const App = () => {
           width: "100%",
           height: `${HeaderHeigthPixels}px`,
           padding: "0 30px",
-          background: "black",
+          // background: "black",
           color: "#48c0ac",
         }}
       >
         <h1
+          className="title"
           style={{
-            fontSize: "60px",
-            fontWeight: "bold",
+            fontWeight: "lighter",
+            fontSize: "80px",
             textTransform: "capitalize",
             textAlign: "center",
           }}
         >
-          <FontAwesomeIcon icon={faListCheck} /> to-do
+          <FontAwesomeIcon icon={faListCheck} style={{ height: "70px" }} />{" "}
+          to-do
         </h1>
       </header>
       <main
         style={{
-          border: "solid 2px green",
+          // border: "solid 2px green",
           width: "100%",
           height: `calc(100vh - ${HeaderHeigthPixels + FooterHeigthPixels}px)`,
           display: "grid",
@@ -116,8 +120,6 @@ export const App = () => {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            background:
-              "linear-gradient(0deg,#2b2a2a -4%, black 64%, transparent -5%)",
           }}
         >
           <FormTask
@@ -147,7 +149,7 @@ export const App = () => {
           )}
           <Button onClick={() => setShowCompleted((prev) => !prev)}>
             <FontAwesomeIcon
-              icon={faEye}
+              icon={showCompleted ? faEyeSlash : faEye}
               style={{
                 background: "transparent",
               }}
