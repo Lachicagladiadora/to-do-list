@@ -14,6 +14,7 @@ import { Footer } from "./components/Footer";
 import { Button } from "./components/Button";
 
 const HeaderHeigthPixels = 140;
+const HeaderWidth = 100;
 const FooterHeigthPixels = 60;
 
 type todoType = {
@@ -77,9 +78,8 @@ export const App = () => {
     >
       <header
         style={{
-          width: "100%",
+          width: `${HeaderWidth}%`,
           height: `${HeaderHeigthPixels}px`,
-          padding: "0 30px",
           color: "#48c0ac",
         }}
       >
@@ -87,13 +87,11 @@ export const App = () => {
           className="title"
           style={{
             fontWeight: "lighter",
-            fontSize: "80px",
             textTransform: "capitalize",
             textAlign: "center",
           }}
         >
-          <FontAwesomeIcon icon={faListCheck} style={{ height: "70px" }} />{" "}
-          to-do
+          <FontAwesomeIcon icon={faListCheck} className="icon-title" /> to-do
         </h1>
       </header>
       <main
@@ -177,7 +175,7 @@ export const App = () => {
           }}
         >
           {!todos.length && <p>You do not have todos yet</p>}
-          {todos.length && !procecedTodos.length && (
+          {Boolean(todos.length) && !procecedTodos.length && (
             <p>There is no todos with the query you wrote</p>
           )}
           <TodoItemList

@@ -27,3 +27,42 @@
 .title {
   font-family: "Rubik Maze", cursive;
 }
+
+@media screen and (max-width: 600px) {
+  header {
+    padding-top: 30px;
+    padding-bottom: 5px;
+  }
+  .title {
+    font-size: 60px;
+  }
+  .svg-inline--fa .fa-list-check .icon-title {
+    height: 60px;
+  }
+}
+
+@media screen and (min-width: 601px) {
+  header {
+    padding: 30px 0px;
+    padding-bottom: 15px;
+  }
+  .title {
+    font-size: 80px;
+  }
+  .svg-inline--fa .fa-list-check .icon-title {
+    height: 80px;
+  }
+}
+
+@media screen and (min-width: 1025px) {
+  header {
+    padding: 30px 0px;
+    margin-bottom: 30px;
+  }
+  .title {
+    font-size: 120px;
+  }
+  .svg-inline--fa .fa-list-check .icon-title {
+    height: 120px;
+  }
+}
