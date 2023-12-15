@@ -4,15 +4,23 @@ type ButtonProps = {
   children: ReactNode;
   onClick?: () => void;
   type?: string;
+  title: string;
   id?: string;
   style?: CSSProperties;
 };
-export const Button = ({ children, onClick, id, style }: ButtonProps) => {
+export const Button = ({
+  children,
+  onClick,
+  title,
+  id,
+  style,
+}: ButtonProps) => {
   return (
     <button
       id={id}
       onClick={onClick}
       type="submit"
+      title={title}
       style={{
         borderStyle: "none",
         padding: "5px 8px",

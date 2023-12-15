@@ -31,6 +31,7 @@ export const FormTask = ({
         width: "100%",
         display: "flex",
         justifyContent: "space-between",
+        alignItems: "center",
         gap: "10px",
         ...style,
       }}
@@ -44,15 +45,16 @@ export const FormTask = ({
         }}
         placeholder="Write a new to-do"
         style={{
-          padding: "10px 20px",
+          padding: "10px",
           fontSize: "20px",
           width: "100%",
         }}
       />
       <Button
+        title="Save To-Do"
         style={{
-          padding: "10px 20px",
-          width: "91px",
+          // padding: "10px 20px",
+          // width: "91px",
           color: "rgb(11, 93, 62)",
           fontSize: "20px",
         }}

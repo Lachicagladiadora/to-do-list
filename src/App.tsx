@@ -102,6 +102,8 @@ export const App = () => {
           gridTemplateColumns: "1fr",
           gridTemplateRows: "auto auto 1fr",
           gap: "20px",
+          paddingLeft: "10px",
+          paddingRight: "10px",
         }}
       >
         {/* filter notes */}
@@ -126,7 +128,7 @@ export const App = () => {
           style={{
             margin: "auto",
             display: "flex",
-            justifyContent: "flex-end",
+            justifyContent: "space-between",
             alignItems: "center",
             width: "100%",
             maxWidth: "900px",
@@ -134,42 +136,56 @@ export const App = () => {
             gap: "20px",
           }}
         >
-          {procecedTodos.length !== todos.length && (
-            <p>
-              You have {procecedTodos.length} of {todos.length} to-dos
-            </p>
-          )}
-          {procecedTodos.length === todos.length && (
-            <p>You have {todos.length} to-dos</p>
-          )}
-          <Button onClick={() => setShowCompleted((prev) => !prev)}>
-            <FontAwesomeIcon
-              icon={showCompleted ? faEyeSlash : faEye}
-              style={{
-                background: "transparent",
-              }}
-            />{" "}
-            {showCompleted ? "Hide completed" : "Show completed"}
-          </Button>
-          {todos.length > 0 && (
-            <Button onClick={removeAllCompletedTodos}>
+          <div>
+            {procecedTodos.length !== todos.length && (
+              <p>
+                You have {procecedTodos.length} of {todos.length} to-dos
+              </p>
+            )}
+            {procecedTodos.length === todos.length && (
+              <p>You have {todos.length} to-dos</p>
+            )}
+          </div>
+          <div style={{ display: "flex", gap: "10px" }}>
+            <Button
+              onClick={() => setShowCompleted((prev) => !prev)}
+              title={
+                showCompleted
+                  ? "Hide completed todos"
+                  : "Display complete todos"
+              }
+            >
               <FontAwesomeIcon
-                icon={faTrashAlt}
+                icon={showCompleted ? faEyeSlash : faEye}
                 style={{
                   background: "transparent",
                 }}
               />{" "}
-              Delete all completed
             </Button>
-          )}
+            {todos.length > 0 && (
+              <Button
+                onClick={removeAllCompletedTodos}
+                title="Delete all completed"
+              >
+                <FontAwesomeIcon
+                  icon={faTrashAlt}
+                  style={{
+                    background: "transparent",
+                  }}
+                />{" "}
+              </Button>
+            )}
+          </div>
         </section>
-        {/* notes */}
+        {/* to-dos */}
         <section
           style={{
             margin: "0px auto",
             display: "flex",
             flexDirection: "column",
+            alignItems: "center",
             maxWidth: "900px",
+            width: "100%",
             color: "white",
             fontSize: "24px",
           }}
