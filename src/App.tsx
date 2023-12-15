@@ -106,7 +106,7 @@ export const App = () => {
           paddingRight: "10px",
         }}
       >
-        {/* filter notes */}
+        {/* filter todos */}
         <section
           style={{
             margin: "auto",
@@ -123,7 +123,7 @@ export const App = () => {
             onChangeInputCallback={onFilterNotes}
           />
         </section>
-        {/* notes options */}
+        {/* todos options */}
         <section
           style={{
             margin: "auto",
@@ -190,7 +190,11 @@ export const App = () => {
             fontSize: "24px",
           }}
         >
-          {!todos.length && <p>You do not have todos yet</p>}
+          {!todos.length && (
+            <p style={{ textAlign: "center", opacity: "0.5" }}>
+              You do not have todos yet
+            </p>
+          )}
           {Boolean(todos.length) && !procecedTodos.length && (
             <p>There is no todos with the query you wrote</p>
           )}

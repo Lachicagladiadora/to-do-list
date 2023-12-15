@@ -53,8 +53,6 @@ export const FormTask = ({
       <Button
         title="Save To-Do"
         style={{
-          // padding: "10px 20px",
-          // width: "91px",
           color: "rgb(11, 93, 62)",
           fontSize: "20px",
         }}
