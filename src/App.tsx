@@ -183,6 +183,7 @@ export const App = () => {
             margin: "0px auto",
             display: "flex",
             flexDirection: "column",
+            gap: "20px",
             alignItems: "center",
             maxWidth: "900px",
             width: "100%",
