@@ -136,7 +136,7 @@ export const App = () => {
             gap: "20px",
           }}
         >
-          <div>
+          <div style={{ fontSize: "26px" }}>
             {procecedTodos.length !== todos.length && (
               <p>
                 You have {procecedTodos.length} of {todos.length} to-dos
@@ -159,6 +159,8 @@ export const App = () => {
                 icon={showCompleted ? faEyeSlash : faEye}
                 style={{
                   background: "transparent",
+                  width: "30px",
+                  height: "30px",
                 }}
               />{" "}
             </Button>
