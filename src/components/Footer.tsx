@@ -16,9 +16,10 @@ export const Footer = ({ style }: FooterProps) => {
         background: "#0B0E0D",
         alignItems: "center",
         justifyContent: "center",
-        padding: "20px",
+        padding: "24px",
         color: "#d8fcf6ca",
         fontFamily: "monospace",
+        fontSize: "24px",
         ...style,
       }}
     >
@@ -28,7 +29,7 @@ export const Footer = ({ style }: FooterProps) => {
         target="_blank"
         style={{
           background: "transparent",
-          fontSize: "20px",
+          fontSize: "30px",
           color: "#48c0ac",
         }}
       >
