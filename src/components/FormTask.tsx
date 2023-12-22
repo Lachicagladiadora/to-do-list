@@ -2,7 +2,7 @@ import { CSSProperties, useState } from "react";
 import { Input } from "./Input";
 import { Button } from "./Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSave } from "@fortawesome/free-solid-svg-icons";
+import { faArrowUp, faSave } from "@fortawesome/free-solid-svg-icons";
 
 type FormTaskProps = {
   createNewTask: (newTaskValue: string) => void;
@@ -45,7 +45,7 @@ export const FormTask = ({
         }}
         placeholder="Write a new to-do"
         style={{
-          padding: "10px",
+          padding: "20px",
           fontSize: "20px",
           width: "100%",
         }}
@@ -57,7 +57,10 @@ export const FormTask = ({
           fontSize: "20px",
         }}
       >
-        <FontAwesomeIcon icon={faSave} style={{ background: "transparent" }} />
+        <FontAwesomeIcon
+          icon={faArrowUp}
+          style={{ background: "transparent", width: "30px", height: "30px" }}
+        />
       </Button>
     </form>
   );
