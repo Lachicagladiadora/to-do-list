@@ -103,8 +103,8 @@ export const App = () => {
           gridTemplateColumns: "1fr",
           gridTemplateRows: "auto auto 1fr",
           gap: "20px",
-          paddingLeft: "10px",
-          paddingRight: "10px",
+          paddingLeft: "24px",
+          paddingRight: "24px",
         }}
       >
         {/* filter todos */}
@@ -190,7 +190,6 @@ export const App = () => {
             flexDirection: "column",
             gap: "20px",
             alignItems: "center",
-            // minWidth: "100px",
             maxWidth: "900px",
             width: "100%",
             color: "white",
