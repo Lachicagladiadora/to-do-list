@@ -174,6 +174,8 @@ export const App = () => {
                   icon={faTrashAlt}
                   style={{
                     background: "transparent",
+                    width: "30px",
+                    height: "30px",
                   }}
                 />{" "}
               </Button>
