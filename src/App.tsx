@@ -9,7 +9,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 import { FormTask } from "./components/FormTask";
-import { TodoItemList } from "./components/TaskItemList";
+import { TodoItemList } from "./components/TodoItemList";
 import { Footer } from "./components/Footer";
 import { Button } from "./components/Button";
 
@@ -31,7 +31,8 @@ export const App = () => {
 
   const createNewTodo = (todoContent: string): void => {
     if (!todos.find((task) => task.content === todoContent)) {
-      setTodos([...todos, { content: todoContent, done: false }]);
+      console.log({ todoContent });
+      setTodos([{ content: todoContent, done: false }, ...todos]);
     }
   };
 
@@ -119,7 +120,7 @@ export const App = () => {
           }}
         >
           <FormTask
-            createNewTask={createNewTodo}
+            createNewTodo={createNewTodo}
             onChangeInputCallback={onFilterNotes}
           />
         </section>
@@ -187,6 +188,7 @@ export const App = () => {
             flexDirection: "column",
             gap: "20px",
             alignItems: "center",
+            // minWidth: "100px",
             maxWidth: "900px",
             width: "100%",
             color: "white",

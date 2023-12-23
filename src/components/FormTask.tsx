@@ -1,32 +1,42 @@
-import { CSSProperties, useState } from "react";
+import { CSSProperties, useCallback, useState } from "react";
 import { Input } from "./Input";
 import { Button } from "./Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowUp, faSave } from "@fortawesome/free-solid-svg-icons";
+import { faMailForward } from "@fortawesome/free-solid-svg-icons";
 
 type FormTaskProps = {
-  createNewTask: (newTaskValue: string) => void;
+  createNewTodo: (newTodoValue: string) => void;
   onChangeInputCallback: (newValue: string) => void;
   style?: CSSProperties;
 };
 
 export const FormTask = ({
-  createNewTask,
+  createNewTodo,
   onChangeInputCallback,
   style,
 }: FormTaskProps) => {
-  const [newTaskValue, setNewTaskValue] = useState("");
+  const [newTodoValue, setNewTodoValue] = useState("");
 
-  const onSubmit = (_event: { preventDefault: () => void }) => {
-    _event.preventDefault();
-    createNewTask(newTaskValue);
-    window.localStorage.setItem("TasksList", newTaskValue);
-    setNewTaskValue("");
-  };
+  const onSubmit = useCallback(
+    (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      if (!newTodoValue) return;
+      if (newTodoValue) {
+        createNewTodo(newTodoValue);
+        window.localStorage.setItem("TasksList", newTodoValue);
+        setNewTodoValue("");
+      }
+    },
+    [createNewTodo, newTodoValue]
+  );
+
+  // const onClick = () =>  {
+  //   if (newTodoValue) return {onSubmit()}
+  //   else {console.warn("todo invalid")}
+  // }
 
   return (
     <form
-      onSubmit={onSubmit}
       style={{
         width: "100%",
         display: "flex",
@@ -37,11 +47,11 @@ export const FormTask = ({
       }}
     >
       <Input
-        value={newTaskValue}
-        onChange={(event) => {
-          const newValue = (event.target as HTMLInputElement).value;
-          setNewTaskValue(newValue);
+        value={newTodoValue}
+        onChange={(e): void => {
+          const newValue = (e.target as HTMLInputElement).value.trim();
           onChangeInputCallback(newValue);
+          return !newValue ? setNewTodoValue("") : setNewTodoValue(newValue);
         }}
         placeholder="Write a new to-do"
         style={{
@@ -52,14 +62,20 @@ export const FormTask = ({
       />
       <Button
         title="Save To-Do"
+        onClick={onSubmit}
         style={{
           color: "rgb(11, 93, 62)",
           fontSize: "20px",
         }}
       >
         <FontAwesomeIcon
-          icon={faArrowUp}
-          style={{ background: "transparent", width: "30px", height: "30px" }}
+          icon={faMailForward}
+          style={{
+            background: "transparent",
+            width: "30px",
+            height: "30px",
+            transform: "rotate(180deg)",
+          }}
         />
       </Button>
     </form>

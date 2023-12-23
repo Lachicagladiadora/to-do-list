@@ -1,4 +1,4 @@
-import { TaskItem } from "./TaskItem";
+import { TodoItem } from "./TodoItem";
 
 type todoType = {
   content: string;
@@ -16,10 +16,12 @@ export const TodoItemList = ({
   toogleTodo,
   showCompleted = false,
 }: TodoItemListProps) => {
-  const taskUnique = (doneValue: boolean) => {
+  const todoUnique = (doneValue: boolean) => {
     return (
       <ul
         style={{
+          minWidth: "300px",
+          // alignItems: "start",
           display: "grid",
           gridTemplateColumns: "1fr",
           gap: "20px",
@@ -28,7 +30,7 @@ export const TodoItemList = ({
         {todo
           .filter((todo: { done: boolean }) => todo.done === doneValue)
           .map((todo: { content: string; done: boolean }) => (
-            <TaskItem
+            <TodoItem
               todo={todo}
               key={Math.floor(Math.random() * 1000000).toString()}
               toogleTodo={toogleTodo}
@@ -37,15 +39,15 @@ export const TodoItemList = ({
       </ul>
     );
   };
-  if (!taskUnique)
+  if (!todoUnique)
     return (
       <p style={{ background: "red", color: "green" }}>
         you have no tasks done
       </p>
     );
   return (
-    <div className="wrapper-task">
-      <ul>{taskUnique(showCompleted)}</ul>
+    <div className="wrapper-task" style={{ width: "100%" }}>
+      <ul>{todoUnique(showCompleted)}</ul>
     </div>
   );
 };
