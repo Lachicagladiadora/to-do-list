@@ -7,16 +7,18 @@ import { faMailForward } from "@fortawesome/free-solid-svg-icons";
 type FormTaskProps = {
   createNewTodo: (newTodoValue: string) => void;
   onChangeInputCallback: (newValue: string) => void;
+  newTodoValue: string;
+  setNewTodoValue: React.Dispatch<React.SetStateAction<string>>;
   style?: CSSProperties;
 };
 
 export const FormTask = ({
   createNewTodo,
   onChangeInputCallback,
+  newTodoValue,
+  setNewTodoValue,
   style,
 }: FormTaskProps) => {
-  const [newTodoValue, setNewTodoValue] = useState("");
-
   const onSubmit = useCallback(
     (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
@@ -27,7 +29,7 @@ export const FormTask = ({
         setNewTodoValue("");
       }
     },
-    [createNewTodo, newTodoValue]
+    [createNewTodo, newTodoValue, setNewTodoValue]
   );
 
   // const onClick = () =>  {
@@ -63,6 +65,7 @@ export const FormTask = ({
       <Button
         title="Save To-Do"
         onClick={onSubmit}
+        ariaLabel="Save To-Do"
         style={{
           color: "rgb(11, 93, 62)",
           fontSize: "20px",

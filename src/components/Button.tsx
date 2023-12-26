@@ -6,12 +6,14 @@ type ButtonProps = {
   type?: string;
   title: string;
   id?: string;
+  ariaLabel?: string;
   style?: CSSProperties;
 };
 export const Button = ({
   children,
   onClick,
   title,
+  ariaLabel,
   id,
   style,
 }: ButtonProps) => {
@@ -21,6 +23,7 @@ export const Button = ({
       onClick={onClick}
       type="submit"
       title={title}
+      aria-label={ariaLabel}
       style={{
         borderStyle: "none",
         padding: "5px 8px",

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -23,6 +23,7 @@ type todoType = {
 };
 
 export const App = () => {
+  const [query, setQuery] = useState<string>("");
   const [todos, setTodos] = useState<{ content: string; done: boolean }[]>([]);
   const [procecedTodos, setProcecedTodos] = useState<
     { content: string; done: boolean }[]
@@ -37,8 +38,8 @@ export const App = () => {
   };
 
   const toogleTodo = (task: todoType) => {
-    setTodos(
-      todos.map((t) =>
+    setTodos((prev) =>
+      prev.map((t) =>
         t.content === task.content ? { ...t, done: !t.done } : t
       )
     );
@@ -49,10 +50,15 @@ export const App = () => {
     setShowCompleted(false);
   };
 
-  const onFilterNotes = (query: string) => {
-    const filteredNotes = todos.filter((cur) => cur.content.includes(query));
-    setProcecedTodos(filteredNotes);
-  };
+  const onFilterNotes = useCallback(
+    (query: string) => {
+      console.log({ todos, query });
+      const filteredNotes = todos.filter((cur) => cur.content.includes(query));
+      console.log({ filteredNotes });
+      setProcecedTodos(filteredNotes);
+    },
+    [todos]
+  );
 
   useEffect(() => {
     const data = localStorage.getItem("TasksList");
@@ -66,8 +72,11 @@ export const App = () => {
   }, [todos]);
 
   useEffect(() => {
-    setProcecedTodos(todos);
-  }, [todos]);
+    // setProcecedTodos(todos);
+    console.log("useEffect query");
+    console.log({ query });
+    onFilterNotes(query);
+  }, [query, onFilterNotes]);
 
   return (
     <div
@@ -122,6 +131,8 @@ export const App = () => {
           <FormTask
             createNewTodo={createNewTodo}
             onChangeInputCallback={onFilterNotes}
+            newTodoValue={query}
+            setNewTodoValue={setQuery}
           />
         </section>
         {/* todos options */}
@@ -153,7 +164,12 @@ export const App = () => {
               title={
                 showCompleted
                   ? "Hide completed todos"
-                  : "Display complete todos"
+                  : "Display completed todos"
+              }
+              ariaLabel={
+                showCompleted
+                  ? "Hide completed todos"
+                  : "Display completed todos"
               }
             >
               <FontAwesomeIcon
@@ -169,6 +185,7 @@ export const App = () => {
               <Button
                 onClick={removeAllCompletedTodos}
                 title="Delete all completed"
+                ariaLabel="Delete all completed"
               >
                 <FontAwesomeIcon
                   icon={faTrashAlt}
