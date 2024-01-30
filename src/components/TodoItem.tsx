@@ -8,16 +8,16 @@ type TodoProps = {
     content: string;
     done: boolean;
   };
-  toogleTodo: (todo: todoType) => void;
+  toggleTodo: (todo: todoType) => void;
 };
 
-export const TodoItem = ({ todo, toogleTodo }: TodoProps) => {
+export const TodoItem = ({ todo, toggleTodo }: TodoProps) => {
   return (
     <li style={{ listStyle: "none" }}>
       <input
         type="checkbox"
         checked={todo.done}
-        onChange={() => toogleTodo(todo)}
+        onChange={() => toggleTodo(todo)}
         style={{
           accentColor: `${todo.done ? "#48c0ac" : "#2b2a2a"}`,
           width: "20px",

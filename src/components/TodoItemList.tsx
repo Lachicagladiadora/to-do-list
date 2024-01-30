@@ -7,13 +7,13 @@ type todoType = {
 
 type TodoItemListProps = {
   todo: todoType[];
-  toogleTodo: (todo: todoType) => void;
+  toggleTodo: (todo: todoType) => void;
   showCompleted: boolean;
 };
 
 export const TodoItemList = ({
   todo,
-  toogleTodo,
+  toggleTodo,
   showCompleted = false,
 }: TodoItemListProps) => {
   const todoUnique = (doneValue: boolean) => {
@@ -33,7 +33,7 @@ export const TodoItemList = ({
             <TodoItem
               todo={todo}
               key={Math.floor(Math.random() * 1000000).toString()}
-              toogleTodo={toogleTodo}
+              toggleTodo={toggleTodo}
             />
           ))}
       </ul>

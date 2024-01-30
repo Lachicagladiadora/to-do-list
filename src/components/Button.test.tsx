@@ -1,7 +1,7 @@
 import { Button } from "./Button";
 import { fireEvent, render, screen } from "@testing-library/react";
 
-describe("testing Button componenet", () => {
+describe("testing Button component", () => {
   it("testing children button", async () => {
     const { debug } = render(
       <Button

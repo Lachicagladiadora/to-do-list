@@ -1,4 +1,4 @@
-import { CSSProperties, useCallback, useState } from "react";
+import { CSSProperties, useCallback } from "react";
 import { Input } from "./Input";
 import { Button } from "./Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -31,11 +31,6 @@ export const FormTask = ({
     },
     [createNewTodo, newTodoValue, setNewTodoValue]
   );
-
-  // const onClick = () =>  {
-  //   if (newTodoValue) return {onSubmit()}
-  //   else {console.warn("todo invalid")}
-  // }
 
   return (
     <form

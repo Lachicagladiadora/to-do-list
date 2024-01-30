@@ -13,9 +13,9 @@ import { TodoItemList } from "./components/TodoItemList";
 import { Footer } from "./components/Footer";
 import { Button } from "./components/Button";
 
-const HeaderHeigthPixels = 140;
+const HeaderHeightPixels = 140;
 const HeaderWidth = 100;
-const FooterHeigthPixels = 60;
+const FooterHeightPixels = 60;
 
 type todoType = {
   content: string;
@@ -37,7 +37,7 @@ export const App = () => {
     }
   };
 
-  const toogleTodo = (task: todoType) => {
+  const toggleTodo = (task: todoType) => {
     setTodos((prev) =>
       prev.map((t) =>
         t.content === task.content ? { ...t, done: !t.done } : t
@@ -89,7 +89,7 @@ export const App = () => {
       <header
         style={{
           width: `${HeaderWidth}%`,
-          height: `${HeaderHeigthPixels}px`,
+          height: `${HeaderHeightPixels}px`,
           color: "#48c0ac",
         }}
       >
@@ -107,7 +107,7 @@ export const App = () => {
       <main
         style={{
           width: "100%",
-          height: `calc(100vh - ${HeaderHeigthPixels + FooterHeigthPixels}px)`,
+          height: `calc(100vh - ${HeaderHeightPixels + FooterHeightPixels}px)`,
           display: "grid",
           gridTemplateColumns: "1fr",
           gridTemplateRows: "auto auto 1fr",
@@ -223,19 +223,19 @@ export const App = () => {
           )}
           <TodoItemList
             todo={procecedTodos}
-            toogleTodo={toogleTodo}
+            toggleTodo={toggleTodo}
             showCompleted={false}
           />
           {showCompleted && (
             <TodoItemList
               todo={procecedTodos}
-              toogleTodo={toogleTodo}
+              toggleTodo={toggleTodo}
               showCompleted={showCompleted}
             />
           )}
         </section>
       </main>
-      <Footer style={{ height: `${FooterHeigthPixels}px` }} />
+      <Footer style={{ height: `${FooterHeightPixels}px` }} />
     </div>
   );
 };
