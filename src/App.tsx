@@ -136,52 +136,52 @@ export const App = () => {
           />
         </section>
         {/* todos options */}
-        <section
-          style={{
-            margin: "auto",
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            width: "100%",
-            maxWidth: "900px",
-            color: "#48c0ac",
-            gap: "20px",
-          }}
-        >
-          <div style={{ fontSize: "26px" }}>
-            {procecedTodos.length !== todos.length && (
-              <p>
-                You have {procecedTodos.length} of {todos.length} to-dos
-              </p>
-            )}
-            {procecedTodos.length === todos.length && (
-              <p>You have {todos.length} to-dos</p>
-            )}
-          </div>
-          <div style={{ display: "flex", gap: "10px" }}>
-            <Button
-              onClick={() => setShowCompleted((prev) => !prev)}
-              title={
-                showCompleted
-                  ? "Hide completed todos"
-                  : "Display completed todos"
-              }
-              ariaLabel={
-                showCompleted
-                  ? "Hide completed todos"
-                  : "Display completed todos"
-              }
-            >
-              <FontAwesomeIcon
-                icon={showCompleted ? faEyeSlash : faEye}
-                style={{
-                  background: "transparent",
-                  width: "30px",
-                  height: "30px",
-                }}
-              />{" "}
-            </Button>
-            {todos.length > 0 && (
+        {todos.length > 0 && (
+          <section
+            style={{
+              margin: "auto",
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              width: "100%",
+              maxWidth: "900px",
+              color: "#48c0ac",
+              gap: "20px",
+            }}
+          >
+            <div style={{ fontSize: "26px" }}>
+              {procecedTodos.length !== todos.length && (
+                <p>
+                  You have {procecedTodos.length} of {todos.length} to-dos
+                </p>
+              )}
+              {procecedTodos.length === todos.length && (
+                <p>You have {todos.length} to-dos</p>
+              )}
+            </div>
+            <div style={{ display: "flex", gap: "10px" }}>
+              <Button
+                onClick={() => setShowCompleted((prev) => !prev)}
+                title={
+                  showCompleted
+                    ? "Hide completed todos"
+                    : "Display completed todos"
+                }
+                ariaLabel={
+                  showCompleted
+                    ? "Hide completed todos"
+                    : "Display completed todos"
+                }
+              >
+                <FontAwesomeIcon
+                  icon={showCompleted ? faEyeSlash : faEye}
+                  style={{
+                    background: "transparent",
+                    width: "30px",
+                    height: "30px",
+                  }}
+                />{" "}
+              </Button>
               <Button
                 onClick={removeAllCompletedTodos}
                 title="Delete all completed"
@@ -194,11 +194,11 @@ export const App = () => {
                     width: "30px",
                     height: "30px",
                   }}
-                />{" "}
+                />
               </Button>
-            )}
-          </div>
-        </section>
+            </div>
+          </section>
+        )}
         {/* to-dos */}
         <section
           style={{
