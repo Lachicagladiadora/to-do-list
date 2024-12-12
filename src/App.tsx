@@ -13,8 +13,8 @@ import { TodoItemList } from "./components/TodoItemList";
 import { Footer } from "./components/Footer";
 import { Button } from "./components/Button";
 
-const HeaderHeightPixels = 140;
-const HeaderWidth = 100;
+// const HeaderHeightPixels = 140;
+// const HeaderWidth = 100;
 const FooterHeightPixels = 60;
 
 type todoType = {
@@ -88,8 +88,8 @@ export const App = () => {
     >
       <header
         style={{
-          width: `${HeaderWidth}%`,
-          height: `${HeaderHeightPixels}px`,
+          // width: `${HeaderWidth}%`,
+          // height: `${HeaderHeightPixels}px`,
           color: "#48c0ac",
         }}
       >
@@ -107,11 +107,17 @@ export const App = () => {
       <main
         style={{
           width: "100%",
-          height: `calc(100vh - ${HeaderHeightPixels + FooterHeightPixels}px)`,
-          display: "grid",
-          gridTemplateColumns: "1fr",
-          gridTemplateRows: "auto auto 1fr",
-          gap: "20px",
+          flex: 1,
+          // height: `calc(100vh - ${HeaderHeightPixels + FooterHeightPixels}px)`,
+          // display: "grid",
+          // gridTemplateColumns: "1fr",
+          // gridTemplateRows: "auto auto 1fr",
+          // gap: "20px",
+          // display: `${todos.length > 0 ? "block" : "flex"}`,
+          // alignItems: `${todos.length > 0 ? "" : "center"}`,
+          // justifyContent: `${todos.length > 0 ? "" : "center"}`,
+          display: "flex",
+          flexDirection: "column",
           paddingLeft: "24px",
           paddingRight: "24px",
         }}
@@ -121,9 +127,11 @@ export const App = () => {
           style={{
             margin: "auto",
             maxWidth: "900px",
+            flex: `${todos.length > 0 ? "" : "1"}`,
             width: "100%",
             height: "80px",
             display: "flex",
+            flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",
           }}
@@ -134,12 +142,25 @@ export const App = () => {
             newTodoValue={query}
             setNewTodoValue={setQuery}
           />
+          {!todos.length && (
+            <p
+              style={{
+                textAlign: "center",
+                opacity: "0.5",
+                color: "white",
+                fontSize: "24px",
+              }}
+            >
+              You do not have todos yet
+            </p>
+          )}
         </section>
         {/* todos options */}
-        {todos.length > 0 && (
+        {todos.length !== 0 && (
           <section
             style={{
               margin: "auto",
+              padding: "40px 0px",
               display: "flex",
               justifyContent: "space-between",
               alignItems: "center",
@@ -172,68 +193,82 @@ export const App = () => {
                     ? "Hide completed todos"
                     : "Display completed todos"
                 }
+                style={{
+                  fontSize: "20px",
+                  padding: "16px ",
+                  borderRadius: "32px",
+                }}
               >
                 <FontAwesomeIcon
                   icon={showCompleted ? faEyeSlash : faEye}
-                  style={{
-                    background: "transparent",
-                    width: "30px",
-                    height: "30px",
-                  }}
+                  // style={{
+                  //   background: "transparent",
+                  //   width: "28px",
+                  //   height: "28px",
+                  //   // borderRadius: "15px",
+                  // }}
                 />{" "}
               </Button>
               <Button
                 onClick={removeAllCompletedTodos}
                 title="Delete all completed"
                 ariaLabel="Delete all completed"
+                style={{
+                  fontSize: "20px",
+                  padding: "12px 19px",
+                  borderRadius: "32px",
+                }}
               >
                 <FontAwesomeIcon
                   icon={faTrashAlt}
-                  style={{
-                    background: "transparent",
-                    width: "30px",
-                    height: "30px",
-                  }}
+                  // style={{
+                  //   background: "transparent",
+                  //   width: "30px",
+                  //   height: "30px",
+                  // }}
                 />
               </Button>
             </div>
           </section>
         )}
         {/* to-dos */}
-        <section
-          style={{
-            margin: "0px auto",
-            display: "flex",
-            flexDirection: "column",
-            gap: "20px",
-            alignItems: "center",
-            maxWidth: "900px",
-            width: "100%",
-            color: "white",
-            fontSize: "24px",
-          }}
-        >
-          {!todos.length && (
+        {todos.length !== 0 && (
+          <section
+            style={{
+              margin: "0px auto",
+              flex: "1",
+              display: "flex",
+              flexDirection: "column",
+              gap: "20px",
+              alignItems: "center",
+              maxWidth: "900px",
+              width: "100%",
+              color: "white",
+              fontSize: "24px",
+            }}
+          >
+            {/* {!todos.length && (
             <p style={{ textAlign: "center", opacity: "0.5" }}>
               You do not have todos yet
             </p>
-          )}
-          {Boolean(todos.length) && !procecedTodos.length && (
-            <p>There is no todos with the query you wrote</p>
-          )}
-          <TodoItemList
-            todo={procecedTodos}
-            toggleTodo={toggleTodo}
-            showCompleted={false}
-          />
-          {showCompleted && (
+          )} */}
+            {Boolean(todos.length) && !procecedTodos.length && (
+              <p>There is no todos with the query you wrote</p>
+            )}
             <TodoItemList
               todo={procecedTodos}
               toggleTodo={toggleTodo}
-              showCompleted={showCompleted}
+              showCompleted={false}
             />
-          )}
-        </section>
+            {showCompleted && (
+              <TodoItemList
+                todo={procecedTodos}
+                toggleTodo={toggleTodo}
+                showCompleted={showCompleted}
+              />
+            )}
+          </section>
+        )}
       </main>
       <Footer style={{ height: `${FooterHeightPixels}px` }} />
     </div>

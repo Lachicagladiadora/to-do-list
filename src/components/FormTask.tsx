@@ -2,7 +2,8 @@ import { CSSProperties, useCallback } from "react";
 import { Input } from "./Input";
 import { Button } from "./Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMailForward } from "@fortawesome/free-solid-svg-icons";
+import { faCheck, faMailForward } from "@fortawesome/free-solid-svg-icons";
+import { faRightLong } from "@fortawesome/free-solid-svg-icons/faRightLong";
 
 type FormTaskProps = {
   createNewTodo: (newTodoValue: string) => void;
@@ -40,6 +41,7 @@ export const FormTask = ({
         justifyContent: "space-between",
         alignItems: "center",
         gap: "10px",
+        padding: "40px 0px",
         ...style,
       }}
     >
@@ -52,8 +54,9 @@ export const FormTask = ({
         }}
         placeholder="Write a new to-do"
         style={{
-          padding: "20px",
+          padding: "14px 20px",
           fontSize: "24px",
+          color: "rgb(220, 255, 242)",
           width: "100%",
         }}
       />
@@ -64,15 +67,17 @@ export const FormTask = ({
         style={{
           color: "rgb(11, 93, 62)",
           fontSize: "20px",
+          padding: "14px",
+          borderRadius: "71.5px",
         }}
       >
         <FontAwesomeIcon
-          icon={faMailForward}
+          icon={faCheck}
           style={{
             background: "transparent",
-            width: "30px",
-            height: "30px",
-            transform: "rotate(180deg)",
+            width: "26px",
+            height: "26px",
+            // transform: "rotate(180deg)",
           }}
         />
       </Button>
