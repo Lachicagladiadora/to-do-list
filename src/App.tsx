@@ -86,40 +86,20 @@ export const App = () => {
         flexDirection: "column",
       }}
     >
-      <header
-        style={{
-          // width: `${HeaderWidth}%`,
-          // height: `${HeaderHeightPixels}px`,
-          color: "#48c0ac",
-        }}
-      >
-        <h1
-          className="title"
-          style={{
-            fontWeight: "lighter",
-            textTransform: "capitalize",
-            textAlign: "center",
-          }}
-        >
-          <FontAwesomeIcon icon={faListCheck} className="icon-title" /> to-do
+      <header>
+        <h1 className="title">
+          <FontAwesomeIcon icon={faListCheck} className="icon-title" /> to - do
         </h1>
       </header>
       <main
         style={{
           width: "100%",
           flex: 1,
-          // height: `calc(100vh - ${HeaderHeightPixels + FooterHeightPixels}px)`,
-          // display: "grid",
-          // gridTemplateColumns: "1fr",
-          // gridTemplateRows: "auto auto 1fr",
-          // gap: "20px",
-          // display: `${todos.length > 0 ? "block" : "flex"}`,
-          // alignItems: `${todos.length > 0 ? "" : "center"}`,
-          // justifyContent: `${todos.length > 0 ? "" : "center"}`,
           display: "flex",
           flexDirection: "column",
-          paddingLeft: "24px",
-          paddingRight: "24px",
+          padding: "0px 24px",
+          // paddingLeft: "24px",
+          // paddingRight: "24px",
         }}
       >
         {/* filter todos */}
@@ -129,7 +109,7 @@ export const App = () => {
             maxWidth: "900px",
             flex: `${todos.length > 0 ? "" : "1"}`,
             width: "100%",
-            height: "80px",
+            // height: "80px",
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
@@ -149,6 +129,7 @@ export const App = () => {
                 opacity: "0.5",
                 color: "white",
                 fontSize: "24px",
+                padding: "40px 0px",
               }}
             >
               You do not have todos yet
@@ -158,29 +139,36 @@ export const App = () => {
         {/* todos options */}
         {todos.length !== 0 && (
           <section
-            style={{
-              margin: "auto",
-              padding: "40px 0px",
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              width: "100%",
-              maxWidth: "900px",
-              color: "#48c0ac",
-              gap: "20px",
-            }}
+            className="options-container"
+            style={
+              {
+                // margin: "auto",
+                // padding: "40px 0px",
+                // display: "flex",
+                // justifyContent: "space-between",
+                // alignItems: "center",
+                // width: "100%",
+                // maxWidth: "900px",
+                // color: "#48c0ac",
+                // gap: "20px",
+              }
+            }
           >
-            <div style={{ fontSize: "26px" }}>
+            <div>
               {procecedTodos.length !== todos.length && (
-                <p>
-                  You have {procecedTodos.length} of {todos.length} to-dos
+                <p className="options-text">
+                  You have <strong>{procecedTodos.length}</strong> to-dos that
+                  start with <strong>"{query}"</strong>
                 </p>
               )}
               {procecedTodos.length === todos.length && (
-                <p>You have {todos.length} to-dos</p>
+                <p className="options-text">You have {todos.length} to-dos</p>
               )}
             </div>
-            <div style={{ display: "flex", gap: "10px" }}>
+            <div
+              // style={{ display: "flex", gap: "10px" }}
+              className="container-buttons-options"
+            >
               <Button
                 onClick={() => setShowCompleted((prev) => !prev)}
                 title={
@@ -193,40 +181,27 @@ export const App = () => {
                     ? "Hide completed todos"
                     : "Display completed todos"
                 }
-                style={{
-                  fontSize: "20px",
-                  padding: "16px ",
-                  borderRadius: "32px",
-                }}
+                classButton="eye-button"
+                // style={{
+                //   fontSize: "20px",
+                //   padding: "16px ",
+                //   borderRadius: "32px",
+                // }}
               >
-                <FontAwesomeIcon
-                  icon={showCompleted ? faEyeSlash : faEye}
-                  // style={{
-                  //   background: "transparent",
-                  //   width: "28px",
-                  //   height: "28px",
-                  //   // borderRadius: "15px",
-                  // }}
-                />{" "}
+                <FontAwesomeIcon icon={showCompleted ? faEyeSlash : faEye} />{" "}
               </Button>
               <Button
                 onClick={removeAllCompletedTodos}
                 title="Delete all completed"
                 ariaLabel="Delete all completed"
-                style={{
-                  fontSize: "20px",
-                  padding: "12px 19px",
-                  borderRadius: "32px",
-                }}
+                classButton="trash-button"
+                // style={{
+                //   fontSize: "20px",
+                //   padding: "12px 19px",
+                //   borderRadius: "32px",
+                // }}
               >
-                <FontAwesomeIcon
-                  icon={faTrashAlt}
-                  // style={{
-                  //   background: "transparent",
-                  //   width: "30px",
-                  //   height: "30px",
-                  // }}
-                />
+                <FontAwesomeIcon icon={faTrashAlt} />
               </Button>
             </div>
           </section>
@@ -270,7 +245,7 @@ export const App = () => {
           </section>
         )}
       </main>
-      <Footer style={{ height: `${FooterHeightPixels}px` }} />
+      <Footer />
     </div>
   );
 };

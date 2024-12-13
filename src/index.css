@@ -5,11 +5,14 @@
   --sacramento: "Sacramento", cursive;
 
   --cherry: #660f39;
-  --pink: #ffffff;
   --deepPink: #ff1493;
-  --font: #0b5d3e;
-  --darkFuchsia: #249079;
-  --deepFuchsia: #48c0ac;
+
+  --white: #ffffff;
+  --black: #000000;
+  --aquamarine-darker: #0b5d3e;
+  --aquamarine-dark: #249079;
+  --aquamarine: #48c0ac;
+  --aquamarine-light: rgb(220, 255, 242);
 }
 
 * {
@@ -19,60 +22,239 @@
   font-family: "Roboto", sans-serif;
 }
 
+header {
+  padding-top: 30px;
+  color: var(--aquamarine);
+  padding: 40px 0px;
+}
+
 .wrapper-general {
   background: linear-gradient(0deg, #2b2a2a 56%, black 100%);
   height: 100vh;
   /* padding: 10px; */
 }
 
+/* header */
 .title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  font-weight: lighter;
+  text-transform: capitalize;
+  text-align: center;
   font-family: "Rubik Maze", cursive;
 }
 
+/* form */
+.input {
+  outline: none;
+  width: 100%;
+  border: solid 2px var(--aquamarine-darker);
+  background: var(--black);
+  color: var(--aquamarine-light);
+}
+
+.button-form {
+  color: var(--aquamarine-darker);
+}
+
+.button-form-icon {
+  background: transparent;
+}
+
+/* to-dos options */
+.options-container {
+  width: 100%;
+  max-width: 900px;
+  margin: 0px auto;
+  color: var(--aquamarine);
+  padding: 40px 0px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 40px 0px;
+}
+
+.container-buttons-options {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+footer {
+  width: 100%;
+  background: var(--black);
+  color: var(--aquamarine-light);
+  /* padding: 24px 0px; */
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  font-family: monospace;
+}
+
+.icon-footer {
+  background: transparent;
+  color: var(--aquamarine);
+}
+
+/* to-dos */
+
 @media screen and (max-width: 600px) {
-  header {
-    padding-top: 30px;
+  /* header {
     padding-bottom: 5px;
-  }
+  } */
   .title {
     font-size: 60px;
   }
   .icon-title {
-    height: 50px;
+    height: 40px;
   }
   .svg-inline--fa .fa-list-check .icon-title {
     height: 60px;
   }
+  .input {
+    font-size: 24px;
+    padding: 6px 12px;
+    border-radius: 24px;
+  }
+  .button-form {
+    font-size: 24px;
+    padding: 4px 8px;
+    border-radius: 22px;
+  }
+  .options-container {
+    flex-direction: column;
+  }
+  .options-text {
+    font-size: 20px;
+  }
+  .container-buttons-options {
+    width: 100%;
+    justify-content: end;
+    gap: 10px;
+  }
+  .eye-button {
+    font-size: 18px;
+    padding: 6px;
+    border-radius: 34px;
+  }
+  .trash-button {
+    font-size: 18px;
+    padding: 6px 8px;
+    border-radius: 32px;
+  }
+  footer {
+    padding: 18px 0px;
+    font-size: 18px;
+  }
+  .icon-footer {
+    font-size: 24px;
+  }
 }
 
 @media screen and (min-width: 601px) {
-  header {
-    padding: 30px 0px;
+  /* header {
     padding-bottom: 15px;
-  }
+  } */
   .title {
     font-size: 80px;
   }
   .icon-title {
-    height: 70px;
+    height: 60px;
   }
   .svg-inline--fa .fa-list-check .icon-title {
     height: 80px;
   }
+  .input {
+    font-size: 26px;
+    padding: 10px 16px;
+    border-radius: 30px;
+  }
+  .button-form {
+    font-size: 36px;
+    padding: 6px 8px;
+    border-radius: 30px;
+    display: flex;
+    justify-items: center;
+    align-items: center;
+  }
+  .options-container {
+    flex-direction: row;
+  }
+  .options-text {
+    font-size: 24px;
+  }
+  .container-buttons-options {
+    width: auto;
+    gap: 28px;
+  }
+  .eye-button {
+    font-size: 20px;
+    padding: 6px;
+    border-radius: 32px;
+  }
+  .trash-button {
+    font-size: 20px;
+    padding: 6px 8px;
+    border-radius: 32px;
+  }
+  footer {
+    padding: 22px 0px;
+    font-size: 22px;
+  }
+  .icon-footer {
+    font-size: 28px;
+  }
 }
 
 @media screen and (min-width: 1025px) {
-  header {
-    padding: 30px 0px;
+  /* header {
     margin-bottom: 30px;
-  }
+  } */
   .title {
     font-size: 120px;
   }
   .icon-title {
-    height: 110px;
+    height: 100px;
   }
   .svg-inline--fa .fa-list-check .icon-title {
     height: 120px;
+  }
+  .input {
+    font-size: 34px;
+    padding: 14px 20px;
+    border-radius: 36px;
+  }
+  .button-form {
+    font-size: 40px;
+    padding: 8px 10px;
+    border-radius: 34px;
+  }
+  .options-text {
+    font-size: 28px;
+  }
+  .container-buttons-options {
+    width: auto;
+    gap: 40px;
+  }
+  .eye-button {
+    font-size: 20px;
+    padding: 12px 12px;
+    border-radius: 32px;
+  }
+  .trash-button {
+    font-size: 20px;
+    padding: 12px 14px;
+    border-radius: 32px;
+  }
+  footer {
+    padding: 24px 0px;
+    font-size: 24px;
+  }
+  .icon-footer {
+    font-size: 30px;
   }
 }

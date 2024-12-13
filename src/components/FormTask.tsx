@@ -2,8 +2,8 @@ import { CSSProperties, useCallback } from "react";
 import { Input } from "./Input";
 import { Button } from "./Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheck, faMailForward } from "@fortawesome/free-solid-svg-icons";
-import { faRightLong } from "@fortawesome/free-solid-svg-icons/faRightLong";
+import { faCheck } from "@fortawesome/free-solid-svg-icons";
+// import { faRightLong } from "@fortawesome/free-solid-svg-icons/faRightLong";
 
 type FormTaskProps = {
   createNewTodo: (newTodoValue: string) => void;
@@ -41,7 +41,7 @@ export const FormTask = ({
         justifyContent: "space-between",
         alignItems: "center",
         gap: "10px",
-        padding: "40px 0px",
+        // padding: "40px 0px",
         ...style,
       }}
     >
@@ -53,33 +53,14 @@ export const FormTask = ({
           return !newValue ? setNewTodoValue("") : setNewTodoValue(newValue);
         }}
         placeholder="Write a new to-do"
-        style={{
-          padding: "14px 20px",
-          fontSize: "24px",
-          color: "rgb(220, 255, 242)",
-          width: "100%",
-        }}
       />
       <Button
         title="Save To-Do"
         onClick={onSubmit}
         ariaLabel="Save To-Do"
-        style={{
-          color: "rgb(11, 93, 62)",
-          fontSize: "20px",
-          padding: "14px",
-          borderRadius: "71.5px",
-        }}
+        classButton="button-form"
       >
-        <FontAwesomeIcon
-          icon={faCheck}
-          style={{
-            background: "transparent",
-            width: "26px",
-            height: "26px",
-            // transform: "rotate(180deg)",
-          }}
-        />
+        <FontAwesomeIcon icon={faCheck} className="button-form-icon" />
       </Button>
     </form>
   );
