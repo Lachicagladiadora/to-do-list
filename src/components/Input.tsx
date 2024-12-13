@@ -24,16 +24,8 @@ export const Input = ({ placeholder, value, onChange, style }: InputProps) => {
       placeholder={placeholder}
       value={value}
       onChange={onChange}
-      style={{
-        borderRadius: "35px",
-        borderStyle: "none",
-        padding: "5px 10px",
-        border: "solid 2px #0b5d3e",
-        background: "black",
-        fontWeight: "700",
-        color: "pink",
-        ...style,
-      }}
+      className="input"
+      style={{ ...style }}
     />
   );
 };

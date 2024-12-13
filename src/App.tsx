@@ -13,9 +13,9 @@ import { TodoItemList } from "./components/TodoItemList";
 import { Footer } from "./components/Footer";
 import { Button } from "./components/Button";
 
-const HeaderHeightPixels = 140;
-const HeaderWidth = 100;
-const FooterHeightPixels = 60;
+// const HeaderHeightPixels = 140;
+// const HeaderWidth = 100;
+// const FooterHeightPixels = 60;
 
 type todoType = {
   content: string;
@@ -86,34 +86,18 @@ export const App = () => {
         flexDirection: "column",
       }}
     >
-      <header
-        style={{
-          width: `${HeaderWidth}%`,
-          height: `${HeaderHeightPixels}px`,
-          color: "#48c0ac",
-        }}
-      >
-        <h1
-          className="title"
-          style={{
-            fontWeight: "lighter",
-            textTransform: "capitalize",
-            textAlign: "center",
-          }}
-        >
-          <FontAwesomeIcon icon={faListCheck} className="icon-title" /> to-do
+      <header>
+        <h1 className="title">
+          <FontAwesomeIcon icon={faListCheck} className="icon-title" /> to - do
         </h1>
       </header>
       <main
         style={{
           width: "100%",
-          height: `calc(100vh - ${HeaderHeightPixels + FooterHeightPixels}px)`,
-          display: "grid",
-          gridTemplateColumns: "1fr",
-          gridTemplateRows: "auto auto 1fr",
-          gap: "20px",
-          paddingLeft: "24px",
-          paddingRight: "24px",
+          flex: 1,
+          display: "flex",
+          flexDirection: "column",
+          padding: "0px 24px",
         }}
       >
         {/* filter todos */}
@@ -121,9 +105,10 @@ export const App = () => {
           style={{
             margin: "auto",
             maxWidth: "900px",
+            flex: `${todos.length > 0 ? "" : "1"}`,
             width: "100%",
-            height: "80px",
             display: "flex",
+            flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",
           }}
@@ -134,108 +119,97 @@ export const App = () => {
             newTodoValue={query}
             setNewTodoValue={setQuery}
           />
+          {!todos.length && (
+            <p
+              style={{
+                textAlign: "center",
+                opacity: "0.5",
+                color: "white",
+                fontSize: "24px",
+                padding: "40px 0px",
+              }}
+            >
+              You do not have todos yet
+            </p>
+          )}
         </section>
         {/* todos options */}
-        <section
-          style={{
-            margin: "auto",
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            width: "100%",
-            maxWidth: "900px",
-            color: "#48c0ac",
-            gap: "20px",
-          }}
-        >
-          <div style={{ fontSize: "26px" }}>
-            {procecedTodos.length !== todos.length && (
-              <p>
-                You have {procecedTodos.length} of {todos.length} to-dos
-              </p>
-            )}
-            {procecedTodos.length === todos.length && (
-              <p>You have {todos.length} to-dos</p>
-            )}
-          </div>
-          <div style={{ display: "flex", gap: "10px" }}>
-            <Button
-              onClick={() => setShowCompleted((prev) => !prev)}
-              title={
-                showCompleted
-                  ? "Hide completed todos"
-                  : "Display completed todos"
-              }
-              ariaLabel={
-                showCompleted
-                  ? "Hide completed todos"
-                  : "Display completed todos"
-              }
-            >
-              <FontAwesomeIcon
-                icon={showCompleted ? faEyeSlash : faEye}
-                style={{
-                  background: "transparent",
-                  width: "30px",
-                  height: "30px",
-                }}
-              />{" "}
-            </Button>
-            {todos.length > 0 && (
+        {todos.length !== 0 && (
+          <section className="options-container">
+            <div>
+              {procecedTodos.length !== todos.length && (
+                <p className="options-text">
+                  You have <strong>{procecedTodos.length}</strong> to-dos that
+                  start with <strong>"{query}"</strong>
+                </p>
+              )}
+              {procecedTodos.length === todos.length && (
+                <p className="options-text">You have {todos.length} to-dos</p>
+              )}
+            </div>
+            <div className="container-buttons-options">
+              <Button
+                onClick={() => setShowCompleted((prev) => !prev)}
+                title={
+                  showCompleted
+                    ? "Hide completed todos"
+                    : "Display completed todos"
+                }
+                ariaLabel={
+                  showCompleted
+                    ? "Hide completed todos"
+                    : "Display completed todos"
+                }
+                classButton="eye-button"
+              >
+                <FontAwesomeIcon icon={showCompleted ? faEyeSlash : faEye} />{" "}
+              </Button>
               <Button
                 onClick={removeAllCompletedTodos}
                 title="Delete all completed"
                 ariaLabel="Delete all completed"
+                classButton="trash-button"
               >
-                <FontAwesomeIcon
-                  icon={faTrashAlt}
-                  style={{
-                    background: "transparent",
-                    width: "30px",
-                    height: "30px",
-                  }}
-                />{" "}
+                <FontAwesomeIcon icon={faTrashAlt} />
               </Button>
-            )}
-          </div>
-        </section>
+            </div>
+          </section>
+        )}
         {/* to-dos */}
-        <section
-          style={{
-            margin: "0px auto",
-            display: "flex",
-            flexDirection: "column",
-            gap: "20px",
-            alignItems: "center",
-            maxWidth: "900px",
-            width: "100%",
-            color: "white",
-            fontSize: "24px",
-          }}
-        >
-          {!todos.length && (
-            <p style={{ textAlign: "center", opacity: "0.5" }}>
-              You do not have todos yet
-            </p>
-          )}
-          {Boolean(todos.length) && !procecedTodos.length && (
-            <p>There is no todos with the query you wrote</p>
-          )}
-          <TodoItemList
-            todo={procecedTodos}
-            toggleTodo={toggleTodo}
-            showCompleted={false}
-          />
-          {showCompleted && (
+        {todos.length !== 0 && (
+          <section
+            style={{
+              margin: "0px auto",
+              flex: "1",
+              display: "flex",
+              flexDirection: "column",
+              gap: "20px",
+              alignItems: "center",
+              maxWidth: "900px",
+              width: "100%",
+              color: "white",
+              fontSize: "24px",
+            }}
+          >
+            {Boolean(todos.length) && !procecedTodos.length && (
+              <p>There is no todos with the query you wrote</p>
+            )}
             <TodoItemList
               todo={procecedTodos}
               toggleTodo={toggleTodo}
-              showCompleted={showCompleted}
+              showCompleted={false}
             />
-          )}
-        </section>
+            {showCompleted && (
+              <TodoItemList
+                todo={procecedTodos}
+                toggleTodo={toggleTodo}
+                showCompleted={showCompleted}
+              />
+            )}
+          </section>
+        )}
       </main>
-      <Footer style={{ height: `${FooterHeightPixels}px` }} />
+      <Footer />
     </div>
   );
 };
