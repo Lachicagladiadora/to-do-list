@@ -3,19 +3,21 @@ import { TodoItem } from "./TodoItem";
 type todoType = {
   content: string;
   done: boolean;
+  id: number;
 };
 
 type TodoItemListProps = {
-  todo: todoType[];
+  todos: todoType[];
   toggleTodo: (todo: todoType) => void;
   showCompleted: boolean;
 };
 
 export const TodoItemList = ({
-  todo,
+  todos,
   toggleTodo,
   showCompleted = false,
 }: TodoItemListProps) => {
+  // const [currentTodoId, setCurrentTodoId] = useState<number>(0);
   const todoUnique = (doneValue: boolean) => {
     return (
       <ul
@@ -24,13 +26,14 @@ export const TodoItemList = ({
           // alignItems: "start",
           display: "grid",
           gridTemplateColumns: "1fr",
-          gap: "4px",
+          gap: "8px",
         }}
       >
-        {todo
+        {todos
           .filter((todo: { done: boolean }) => todo.done === doneValue)
-          .map((todo: { content: string; done: boolean }) => (
+          .map((todo: { content: string; done: boolean; id: number }) => (
             <TodoItem
+              // currentTodoId={currentTodoId}
               todo={todo}
               key={Math.floor(Math.random() * 1000000).toString()}
               toggleTodo={toggleTodo}

@@ -195,13 +195,13 @@ export const App = () => {
               <p>There is no todos with the query you wrote</p>
             )}
             <TodoItemList
-              todo={procecedTodos}
+              todos={procecedTodos}
               toggleTodo={toggleTodo}
               showCompleted={false}
             />
             {showCompleted && (
               <TodoItemList
-                todo={procecedTodos}
+                todos={procecedTodos}
                 toggleTodo={toggleTodo}
                 showCompleted={showCompleted}
               />
