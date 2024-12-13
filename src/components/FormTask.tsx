@@ -41,7 +41,6 @@ export const FormTask = ({
         justifyContent: "space-between",
         alignItems: "center",
         gap: "10px",
-        // padding: "40px 0px",
         ...style,
       }}
     >

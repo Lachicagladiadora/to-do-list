@@ -15,7 +15,7 @@ import { Button } from "./components/Button";
 
 // const HeaderHeightPixels = 140;
 // const HeaderWidth = 100;
-const FooterHeightPixels = 60;
+// const FooterHeightPixels = 60;
 
 type todoType = {
   content: string;
@@ -98,8 +98,6 @@ export const App = () => {
           display: "flex",
           flexDirection: "column",
           padding: "0px 24px",
-          // paddingLeft: "24px",
-          // paddingRight: "24px",
         }}
       >
         {/* filter todos */}
@@ -109,7 +107,6 @@ export const App = () => {
             maxWidth: "900px",
             flex: `${todos.length > 0 ? "" : "1"}`,
             width: "100%",
-            // height: "80px",
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
@@ -138,22 +135,7 @@ export const App = () => {
         </section>
         {/* todos options */}
         {todos.length !== 0 && (
-          <section
-            className="options-container"
-            style={
-              {
-                // margin: "auto",
-                // padding: "40px 0px",
-                // display: "flex",
-                // justifyContent: "space-between",
-                // alignItems: "center",
-                // width: "100%",
-                // maxWidth: "900px",
-                // color: "#48c0ac",
-                // gap: "20px",
-              }
-            }
-          >
+          <section className="options-container">
             <div>
               {procecedTodos.length !== todos.length && (
                 <p className="options-text">
@@ -165,10 +147,7 @@ export const App = () => {
                 <p className="options-text">You have {todos.length} to-dos</p>
               )}
             </div>
-            <div
-              // style={{ display: "flex", gap: "10px" }}
-              className="container-buttons-options"
-            >
+            <div className="container-buttons-options">
               <Button
                 onClick={() => setShowCompleted((prev) => !prev)}
                 title={
@@ -182,11 +161,6 @@ export const App = () => {
                     : "Display completed todos"
                 }
                 classButton="eye-button"
-                // style={{
-                //   fontSize: "20px",
-                //   padding: "16px ",
-                //   borderRadius: "32px",
-                // }}
               >
                 <FontAwesomeIcon icon={showCompleted ? faEyeSlash : faEye} />{" "}
               </Button>
@@ -195,11 +169,6 @@ export const App = () => {
                 title="Delete all completed"
                 ariaLabel="Delete all completed"
                 classButton="trash-button"
-                // style={{
-                //   fontSize: "20px",
-                //   padding: "12px 19px",
-                //   borderRadius: "32px",
-                // }}
               >
                 <FontAwesomeIcon icon={faTrashAlt} />
               </Button>
@@ -222,11 +191,6 @@ export const App = () => {
               fontSize: "24px",
             }}
           >
-            {/* {!todos.length && (
-            <p style={{ textAlign: "center", opacity: "0.5" }}>
-              You do not have todos yet
-            </p>
-          )} */}
             {Boolean(todos.length) && !procecedTodos.length && (
               <p>There is no todos with the query you wrote</p>
             )}
