@@ -24,7 +24,7 @@ export const TodoItemList = ({
           // alignItems: "start",
           display: "grid",
           gridTemplateColumns: "1fr",
-          gap: "20px",
+          gap: "4px",
         }}
       >
         {todo

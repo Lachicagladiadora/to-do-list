@@ -153,12 +153,12 @@ export const App = () => {
                 title={
                   showCompleted
                     ? "Hide completed todos"
-                    : "Display completed todos"
+                    : "Show completed todos"
                 }
                 ariaLabel={
                   showCompleted
                     ? "Hide completed todos"
-                    : "Display completed todos"
+                    : "Show completed todos"
                 }
                 classButton="eye-button"
               >
