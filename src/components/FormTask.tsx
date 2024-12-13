@@ -25,7 +25,7 @@ export const FormTask = ({
       e.preventDefault();
       if (!newTodoValue) return;
       if (newTodoValue) {
-        createNewTodo(newTodoValue);
+        createNewTodo(newTodoValue.trim());
         window.localStorage.setItem("TasksList", newTodoValue);
         setNewTodoValue("");
       }
@@ -47,7 +47,7 @@ export const FormTask = ({
       <Input
         value={newTodoValue}
         onChange={(e): void => {
-          const newValue = (e.target as HTMLInputElement).value.trim();
+          const newValue = (e.target as HTMLInputElement).value;
           onChangeInputCallback(newValue);
           return !newValue ? setNewTodoValue("") : setNewTodoValue(newValue);
         }}
