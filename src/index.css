@@ -100,6 +100,34 @@ footer {
 }
 
 /* to-dos */
+.to-do-item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 8px;
+  border-radius: 24px;
+}
+
+.to-do-item .check {
+  display: none;
+}
+
+.to-do-item:hover {
+  background: #000000;
+}
+
+.to-do-item:has(:checked) .non-check {
+  display: none;
+}
+
+.to-do-item:has(:checked) .check {
+  display: inline;
+}
+
+.check {
+  color: var(--aquamarine);
+}
 
 @media screen and (max-width: 600px) {
   .title {
