@@ -133,10 +133,17 @@ footer {
   /* padding: 4px 6px; */
   font-size: 15px;
   border-radius: 20px;
-  position: absolute;
-  top: -15px;
-  right: -5px;
+  /* position: absolute; */
+  /* top: -15px; */
+  /* right: -5px; */
   display: none;
+  border: none;
+  background: transparent;
+  color: var(--aquamarine);
+}
+
+.edit-button:hover {
+  background: var(--aquamarine-darker);
 }
 
 .to-do-item:hover + .edit-button {

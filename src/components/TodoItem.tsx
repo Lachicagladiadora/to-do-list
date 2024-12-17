@@ -1,10 +1,11 @@
-import { faCircle, faCircleXmark } from "@fortawesome/free-regular-svg-icons";
+import { faCircle } from "@fortawesome/free-regular-svg-icons";
 import { faCheckCircle } from "@fortawesome/free-solid-svg-icons/faCheckCircle";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button } from "./Button";
 import { faPen, faRightLong, faXmark } from "@fortawesome/free-solid-svg-icons";
-import { useState } from "react";
+import { FormEvent, useContext, useState } from "react";
 import { Input } from "./Input";
+import { AllTodosContext } from "../App";
 // import { useState } from "react";
 
 type todoType = {
@@ -22,18 +23,35 @@ type TodoProps = {
 export const TodoItem = ({ todo, toggleTodo }: TodoProps) => {
   const [currentId, setCurrentId] = useState(0);
   const [showEditForm, setShowEditForm] = useState(false);
-  const [newValue, setNewValue] = useState("");
+  const [newValue, setNewValue] = useState(todo.content);
+
+  const AllTodos = useContext(AllTodosContext);
 
   const onShowEditForm = (id: number) => {
     // setShowEditForm(false);
+
     setCurrentId(id);
     if (id !== todo.id) return;
     setShowEditForm((p) => !p);
   };
 
+  const updateTodo = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    //use allTodos
+    console.log({ e, elements: e.target, input: e.target[0].value });
+    setShowEditForm(false);
+  };
+
   return (
     <li
-      style={{ width: "100%", listStyle: "none", position: "relative" }}
+      style={{
+        width: "100%",
+        listStyle: "none",
+        position: "relative",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-between",
+      }}
       key={todo.id}
     >
       {!showEditForm && (
@@ -56,20 +74,25 @@ export const TodoItem = ({ todo, toggleTodo }: TodoProps) => {
         </label>
       )}
       {showEditForm && (
-        <form className="to-do-item form-todo">
+        <form className="to-do-item form-todo" onSubmit={(e) => updateTodo(e)}>
           <Input
             value={newValue}
             onChange={(e) => setNewValue(e.target.value)}
             style={{ fontSize: "20px", padding: "6px 6px" }}
           />
-          <Button title="Update to-do" classButton="form-edit-button">
+          <Button
+            title="Update to-do"
+            classButton="form-edit-button"
+            // onClick={updateTodo()}
+          >
             <FontAwesomeIcon icon={faRightLong} />
           </Button>
         </form>
       )}
-      <Button
+
+      <button
         title="Edit to-do"
-        classButton="edit-button"
+        className="edit-button"
         onClick={() => onShowEditForm(todo.id)}
         style={{
           padding: `${
@@ -77,12 +100,10 @@ export const TodoItem = ({ todo, toggleTodo }: TodoProps) => {
           }`,
         }}
       >
-        {currentId === todo.id && showEditForm ? (
-          <FontAwesomeIcon icon={faXmark} />
-        ) : (
-          <FontAwesomeIcon icon={faPen} />
-        )}
-      </Button>
+        <FontAwesomeIcon
+          icon={currentId === todo.id && showEditForm ? faXmark : faPen}
+        />
+      </button>
     </li>
   );
 };
