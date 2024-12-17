@@ -5,25 +5,26 @@ import { Button } from "./Button";
 import { faPen, faRightLong, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FormEvent, useContext, useState } from "react";
 import { Input } from "./Input";
+import { TodoData } from "../types";
 
-type todoType = {
-  content: string;
-  done: boolean;
-  id: number;
-};
+// type todoType = {
+//   content: string;
+//   done: boolean;
+//   id: number;
+// };
 
 type TodoProps = {
   // currentTodoId: number;
-  todo: todoType;
-  toggleTodo: (todo: todoType) => void;
+  todo: TodoData;
+  toggleTodo: (todo: TodoData) => void;
 };
 
 export const TodoItem = ({ todo, toggleTodo }: TodoProps) => {
-  const [currentId, setCurrentId] = useState(0);
+  const [currentId, setCurrentId] = useState("000000");
   const [showEditForm, setShowEditForm] = useState(false);
   const [newValue, setNewValue] = useState(todo.content);
 
-  const onShowEditForm = (id: number) => {
+  const onShowEditForm = (id: string) => {
     // setShowEditForm(false);
 
     setCurrentId(id);

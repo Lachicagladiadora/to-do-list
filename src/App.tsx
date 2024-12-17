@@ -12,12 +12,7 @@ import { FormTask } from "./components/FormTask";
 import { TodoItemList } from "./components/TodoItemList";
 import { Footer } from "./components/Footer";
 import { Button } from "./components/Button";
-
-type todoType = {
-  id: string;
-  content: string;
-  done: boolean;
-};
+import { TodoData } from "./types";
 
 const getId = () => {
   const dataId = Math.floor(Math.random() * 1000000);
@@ -25,10 +20,10 @@ const getId = () => {
 };
 
 export const App = () => {
-  const [todos, setTodos] = useState<todoType[]>([]);
+  const [todos, setTodos] = useState<TodoData[]>([]);
 
   const [query, setQuery] = useState<string>("");
-  const [procecedTodos, setProcecedTodos] = useState<todoType[]>([]);
+  const [procecedTodos, setProcecedTodos] = useState<TodoData[]>([]);
   const [showCompleted, setShowCompleted] = useState(true);
 
   const createNewTodo = (todoContent: string): void => {
@@ -38,7 +33,7 @@ export const App = () => {
     }
   };
 
-  const toggleTodo = (task: todoType) => {
+  const toggleTodo = (task: TodoData) => {
     setTodos((prev) =>
       prev.map((t) =>
         t.content === task.content ? { ...t, done: !t.done } : t
