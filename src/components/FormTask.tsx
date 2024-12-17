@@ -3,7 +3,6 @@ import { Input } from "./Input";
 import { Button } from "./Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
-// import { faRightLong } from "@fortawesome/free-solid-svg-icons/faRightLong";
 
 type FormTaskProps = {
   createNewTodo: (newTodoValue: string) => void;

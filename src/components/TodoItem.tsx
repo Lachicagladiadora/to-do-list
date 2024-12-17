@@ -5,8 +5,6 @@ import { Button } from "./Button";
 import { faPen, faRightLong, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FormEvent, useContext, useState } from "react";
 import { Input } from "./Input";
-import { AllTodosContext } from "../App";
-// import { useState } from "react";
 
 type todoType = {
   content: string;
@@ -24,8 +22,6 @@ export const TodoItem = ({ todo, toggleTodo }: TodoProps) => {
   const [currentId, setCurrentId] = useState(0);
   const [showEditForm, setShowEditForm] = useState(false);
   const [newValue, setNewValue] = useState(todo.content);
-
-  const AllTodos = useContext(AllTodosContext);
 
   const onShowEditForm = (id: number) => {
     // setShowEditForm(false);
@@ -67,7 +63,6 @@ export const TodoItem = ({ todo, toggleTodo }: TodoProps) => {
               width: "20px",
               height: "20px",
               display: "none",
-              // borderRadius: "20px",
             }}
           />
           {todo.content}
@@ -80,11 +75,7 @@ export const TodoItem = ({ todo, toggleTodo }: TodoProps) => {
             onChange={(e) => setNewValue(e.target.value)}
             style={{ fontSize: "20px", padding: "6px 6px" }}
           />
-          <Button
-            title="Update to-do"
-            classButton="form-edit-button"
-            // onClick={updateTodo()}
-          >
+          <Button title="Update to-do" classButton="form-edit-button">
             <FontAwesomeIcon icon={faRightLong} />
           </Button>
         </form>

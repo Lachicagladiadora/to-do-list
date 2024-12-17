@@ -1,10 +1,4 @@
-import {
-  createContext,
-  useCallback,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import { useCallback, useEffect, useState } from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -19,10 +13,6 @@ import { TodoItemList } from "./components/TodoItemList";
 import { Footer } from "./components/Footer";
 import { Button } from "./components/Button";
 
-// const HeaderHeightPixels = 140;
-// const HeaderWidth = 100;
-// const FooterHeightPixels = 60;
-
 type todoType = {
   id: string;
   content: string;
@@ -34,12 +24,8 @@ const getId = () => {
   return dataId.toString();
 };
 
-export const AllTodosContext = createContext<todoType[]>([]);
-
 export const App = () => {
-  const allTodos = useContext(AllTodosContext);
-
-  const [todos, setTodos] = useState<todoType[]>(allTodos);
+  const [todos, setTodos] = useState<todoType[]>([]);
 
   const [query, setQuery] = useState<string>("");
   const [procecedTodos, setProcecedTodos] = useState<todoType[]>([]);
@@ -67,9 +53,7 @@ export const App = () => {
 
   const onFilterNotes = useCallback(
     (query: string) => {
-      // console.log({ todos, query });
       const filteredNotes = todos.filter((cur) => cur.content.includes(query));
-      // console.log({ filteredNotes });
       setProcecedTodos(filteredNotes);
     },
     [todos]
@@ -87,9 +71,6 @@ export const App = () => {
   }, [todos]);
 
   useEffect(() => {
-    // setProcecedTodos(todos);
-    // console.log("useEffect query");
-    // console.log({ query });
     onFilterNotes(query);
   }, [query, onFilterNotes]);
 
@@ -106,126 +87,124 @@ export const App = () => {
           <FontAwesomeIcon icon={faListCheck} className="icon-title" /> to - do
         </h1>
       </header>
-      <AllTodosContext.Provider value={todos}>
-        <main
+      <main
+        style={{
+          width: "100%",
+          flex: 1,
+          display: "flex",
+          flexDirection: "column",
+          padding: "0px 24px",
+        }}
+      >
+        {/* filter todos */}
+        <section
           style={{
+            margin: "auto",
+            maxWidth: "900px",
+            flex: `${todos.length > 0 ? "" : "1"}`,
             width: "100%",
-            flex: 1,
             display: "flex",
             flexDirection: "column",
-            padding: "0px 24px",
+            alignItems: "center",
+            justifyContent: "center",
           }}
         >
-          {/* filter todos */}
-          <section
-            style={{
-              margin: "auto",
-              maxWidth: "900px",
-              flex: `${todos.length > 0 ? "" : "1"}`,
-              width: "100%",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <FormTask
-              createNewTodo={createNewTodo}
-              onChangeInputCallback={onFilterNotes}
-              newTodoValue={query}
-              setNewTodoValue={setQuery}
-            />
-            {!todos.length && (
-              <p
-                style={{
-                  textAlign: "center",
-                  opacity: "0.5",
-                  color: "white",
-                  fontSize: "24px",
-                  padding: "40px 0px",
-                }}
-              >
-                You do not have todos yet
-              </p>
-            )}
-          </section>
-          {/* todos options */}
-          {todos.length !== 0 && (
-            <section className="options-container">
-              <div>
-                {procecedTodos.length !== todos.length && (
-                  <p className="options-text">
-                    You have <strong>{procecedTodos.length}</strong> to-dos that
-                    start with <strong>"{query}"</strong>
-                  </p>
-                )}
-                {procecedTodos.length === todos.length && (
-                  <p className="options-text">You have {todos.length} to-dos</p>
-                )}
-              </div>
-              <div className="container-buttons-options">
-                <Button
-                  onClick={() => setShowCompleted((prev) => !prev)}
-                  title={
-                    showCompleted
-                      ? "Hide completed todos"
-                      : "Show completed todos"
-                  }
-                  ariaLabel={
-                    showCompleted
-                      ? "Hide completed todos"
-                      : "Show completed todos"
-                  }
-                  classButton="eye-button"
-                >
-                  <FontAwesomeIcon icon={showCompleted ? faEyeSlash : faEye} />{" "}
-                </Button>
-                <Button
-                  onClick={removeAllCompletedTodos}
-                  title="Delete all completed"
-                  ariaLabel="Delete all completed"
-                  classButton="trash-button"
-                >
-                  <FontAwesomeIcon icon={faTrashAlt} />
-                </Button>
-              </div>
-            </section>
-          )}
-          {/* to-dos */}
-          {todos.length !== 0 && (
-            <section
+          <FormTask
+            createNewTodo={createNewTodo}
+            onChangeInputCallback={onFilterNotes}
+            newTodoValue={query}
+            setNewTodoValue={setQuery}
+          />
+          {!todos.length && (
+            <p
               style={{
-                margin: "0px auto",
-                flex: "1",
-                display: "flex",
-                flexDirection: "column",
-                gap: "20px",
-                alignItems: "center",
-                maxWidth: "900px",
-                width: "100%",
+                textAlign: "center",
+                opacity: "0.5",
                 color: "white",
                 fontSize: "24px",
+                padding: "40px 0px",
               }}
             >
-              {Boolean(todos.length) && !procecedTodos.length && (
-                <p>There is no todos with the query you wrote</p>
+              You do not have todos yet
+            </p>
+          )}
+        </section>
+        {/* todos options */}
+        {todos.length !== 0 && (
+          <section className="options-container">
+            <div>
+              {procecedTodos.length !== todos.length && (
+                <p className="options-text">
+                  You have <strong>{procecedTodos.length}</strong> to-dos that
+                  start with <strong>"{query}"</strong>
+                </p>
               )}
+              {procecedTodos.length === todos.length && (
+                <p className="options-text">You have {todos.length} to-dos</p>
+              )}
+            </div>
+            <div className="container-buttons-options">
+              <Button
+                onClick={() => setShowCompleted((prev) => !prev)}
+                title={
+                  showCompleted
+                    ? "Hide completed todos"
+                    : "Show completed todos"
+                }
+                ariaLabel={
+                  showCompleted
+                    ? "Hide completed todos"
+                    : "Show completed todos"
+                }
+                classButton="eye-button"
+              >
+                <FontAwesomeIcon icon={showCompleted ? faEyeSlash : faEye} />{" "}
+              </Button>
+              <Button
+                onClick={removeAllCompletedTodos}
+                title="Delete all completed"
+                ariaLabel="Delete all completed"
+                classButton="trash-button"
+              >
+                <FontAwesomeIcon icon={faTrashAlt} />
+              </Button>
+            </div>
+          </section>
+        )}
+        {/* to-dos */}
+        {todos.length !== 0 && (
+          <section
+            style={{
+              margin: "0px auto",
+              flex: "1",
+              display: "flex",
+              flexDirection: "column",
+              gap: "20px",
+              alignItems: "center",
+              maxWidth: "900px",
+              width: "100%",
+              color: "white",
+              fontSize: "24px",
+            }}
+          >
+            {Boolean(todos.length) && !procecedTodos.length && (
+              <p>There is no todos with the query you wrote</p>
+            )}
+            <TodoItemList
+              todos={procecedTodos}
+              toggleTodo={toggleTodo}
+              showCompleted={false}
+            />
+            {showCompleted && (
               <TodoItemList
                 todos={procecedTodos}
                 toggleTodo={toggleTodo}
-                showCompleted={false}
+                showCompleted={showCompleted}
               />
-              {showCompleted && (
-                <TodoItemList
-                  todos={procecedTodos}
-                  toggleTodo={toggleTodo}
-                  showCompleted={showCompleted}
-                />
-              )}
-            </section>
-          )}
-        </main>
-      </AllTodosContext.Provider>
+            )}
+          </section>
+        )}
+      </main>
       <Footer />
     </div>
   );

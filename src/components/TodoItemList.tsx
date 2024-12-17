@@ -17,13 +17,11 @@ export const TodoItemList = ({
   toggleTodo,
   showCompleted = false,
 }: TodoItemListProps) => {
-  // const [currentTodoId, setCurrentTodoId] = useState<number>(0);
   const todoUnique = (doneValue: boolean) => {
     return (
       <ul
         style={{
           minWidth: "300px",
-          // alignItems: "start",
           display: "grid",
           gridTemplateColumns: "1fr",
           gap: "8px",
@@ -33,7 +31,6 @@ export const TodoItemList = ({
           .filter((todo: { done: boolean }) => todo.done === doneValue)
           .map((todo: { content: string; done: boolean; id: number }) => (
             <TodoItem
-              // currentTodoId={currentTodoId}
               todo={todo}
               key={Math.floor(Math.random() * 1000000).toString()}
               toggleTodo={toggleTodo}
