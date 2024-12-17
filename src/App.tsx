@@ -13,11 +13,7 @@ import { TodoItemList } from "./components/TodoItemList";
 import { Footer } from "./components/Footer";
 import { Button } from "./components/Button";
 import { TodoData } from "./types";
-
-const getId = () => {
-  const dataId = Math.floor(Math.random() * 1000000);
-  return dataId.toString();
-};
+import { getId } from "./utilities";
 
 export const App = () => {
   const [todos, setTodos] = useState<TodoData[]>([]);

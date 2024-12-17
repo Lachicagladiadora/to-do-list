@@ -3,15 +3,9 @@ import { faCheckCircle } from "@fortawesome/free-solid-svg-icons/faCheckCircle";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button } from "./Button";
 import { faPen, faRightLong, faXmark } from "@fortawesome/free-solid-svg-icons";
-import { FormEvent, useContext, useState } from "react";
+import { FormEvent, useState } from "react";
 import { Input } from "./Input";
 import { TodoData } from "../types";
-
-// type todoType = {
-//   content: string;
-//   done: boolean;
-//   id: number;
-// };
 
 type TodoProps = {
   // currentTodoId: number;

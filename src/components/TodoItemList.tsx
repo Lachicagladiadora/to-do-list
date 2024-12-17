@@ -1,11 +1,6 @@
 import { TodoData } from "../types";
+import { getId } from "../utilities";
 import { TodoItem } from "./TodoItem";
-
-// type todoType = {
-//   content: string;
-//   done: boolean;
-//   id: number;
-// };
 
 type TodoItemListProps = {
   todos: TodoData[];
@@ -31,11 +26,7 @@ export const TodoItemList = ({
         {todos
           .filter((todo: { done: boolean }) => todo.done === doneValue)
           .map((todo: { content: string; done: boolean; id: string }) => (
-            <TodoItem
-              todo={todo}
-              key={Math.floor(Math.random() * 1000000).toString()}
-              toggleTodo={toggleTodo}
-            />
+            <TodoItem todo={todo} key={getId()} toggleTodo={toggleTodo} />
           ))}
       </ul>
     );
