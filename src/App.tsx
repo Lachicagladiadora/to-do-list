@@ -183,14 +183,18 @@ export const App = () => {
             )}
             <TodoItemList
               todos={procecedTodos}
+              allTodos={todos}
               toggleTodo={toggleTodo}
               showCompleted={false}
+              fnAllTodos={setTodos}
             />
             {showCompleted && (
               <TodoItemList
                 todos={procecedTodos}
+                allTodos={todos}
                 toggleTodo={toggleTodo}
                 showCompleted={showCompleted}
+                fnAllTodos={setTodos}
               />
             )}
           </section>

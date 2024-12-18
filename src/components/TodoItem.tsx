@@ -3,7 +3,7 @@ import { faCheckCircle } from "@fortawesome/free-solid-svg-icons/faCheckCircle";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button } from "./Button";
 import { faPen, faRightLong, faXmark } from "@fortawesome/free-solid-svg-icons";
-import { FormEvent, useState } from "react";
+import { Dispatch, FormEvent, useState } from "react";
 import { Input } from "./Input";
 import { TodoData } from "../types";
 
@@ -11,9 +11,16 @@ type TodoProps = {
   // currentTodoId: number;
   todo: TodoData;
   toggleTodo: (todo: TodoData) => void;
+  allTodos: TodoData[];
+  fnAllTodos: Dispatch<React.SetStateAction<TodoData[]>>;
 };
 
-export const TodoItem = ({ todo, toggleTodo }: TodoProps) => {
+export const TodoItem = ({
+  todo,
+  toggleTodo,
+  allTodos,
+  fnAllTodos,
+}: TodoProps) => {
   const [currentId, setCurrentId] = useState("000000");
   const [showEditForm, setShowEditForm] = useState(false);
   const [newValue, setNewValue] = useState(todo.content);
@@ -28,7 +35,9 @@ export const TodoItem = ({ todo, toggleTodo }: TodoProps) => {
 
   const updateTodo = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    //use allTodos
+    fnAllTodos((p) =>
+      p.filter((c) => (c.id === currentId ? (c.content = newValue) : c.content))
+    );
     console.log({ e, elements: e.target, input: e.target[0].value });
     setShowEditForm(false);
   };
