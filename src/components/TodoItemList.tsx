@@ -1,39 +1,42 @@
+import { Dispatch } from "react";
+import { TodoData } from "../types";
+import { getId } from "../utilities";
 import { TodoItem } from "./TodoItem";
 
-type todoType = {
-  content: string;
-  done: boolean;
-};
-
 type TodoItemListProps = {
-  todo: todoType[];
-  toggleTodo: (todo: todoType) => void;
+  todos: TodoData[];
+  allTodos: TodoData[];
+  toggleTodo: (todo: TodoData) => void;
   showCompleted: boolean;
+  fnAllTodos: Dispatch<React.SetStateAction<TodoData[]>>;
 };
 
 export const TodoItemList = ({
-  todo,
+  todos,
+
   toggleTodo,
   showCompleted = false,
+  fnAllTodos,
 }: TodoItemListProps) => {
   const todoUnique = (doneValue: boolean) => {
     return (
       <ul
         style={{
           minWidth: "300px",
-          // alignItems: "start",
           display: "grid",
           gridTemplateColumns: "1fr",
-          gap: "4px",
+          gap: "8px",
         }}
       >
-        {todo
+        {todos
           .filter((todo: { done: boolean }) => todo.done === doneValue)
-          .map((todo: { content: string; done: boolean }) => (
+          .map((todo: { content: string; done: boolean; id: string }) => (
             <TodoItem
               todo={todo}
-              key={Math.floor(Math.random() * 1000000).toString()}
+              key={getId()}
               toggleTodo={toggleTodo}
+              allTodos={todos}
+              fnAllTodos={fnAllTodos}
             />
           ))}
       </ul>

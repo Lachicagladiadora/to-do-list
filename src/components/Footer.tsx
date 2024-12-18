@@ -20,7 +20,7 @@ export const Footer = ({ style }: FooterProps) => {
           style={{ background: "transparent" }}
         />
       </a>
-      <span style={{ background: "transparent" }}>2023</span>
+      <span style={{ background: "transparent" }}>2024</span>
     </footer>
   );
 };

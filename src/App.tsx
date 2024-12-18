@@ -12,32 +12,24 @@ import { FormTask } from "./components/FormTask";
 import { TodoItemList } from "./components/TodoItemList";
 import { Footer } from "./components/Footer";
 import { Button } from "./components/Button";
-
-// const HeaderHeightPixels = 140;
-// const HeaderWidth = 100;
-// const FooterHeightPixels = 60;
-
-type todoType = {
-  content: string;
-  done: boolean;
-};
+import { TodoData } from "./types";
+import { getId } from "./utilities";
 
 export const App = () => {
+  const [todos, setTodos] = useState<TodoData[]>([]);
+
   const [query, setQuery] = useState<string>("");
-  const [todos, setTodos] = useState<{ content: string; done: boolean }[]>([]);
-  const [procecedTodos, setProcecedTodos] = useState<
-    { content: string; done: boolean }[]
-  >([]);
+  const [procecedTodos, setProcecedTodos] = useState<TodoData[]>([]);
   const [showCompleted, setShowCompleted] = useState(true);
 
   const createNewTodo = (todoContent: string): void => {
     if (!todos.find((task) => task.content === todoContent)) {
       console.log({ todoContent });
-      setTodos([{ content: todoContent, done: false }, ...todos]);
+      setTodos([{ id: getId(), content: todoContent, done: false }, ...todos]);
     }
   };
 
-  const toggleTodo = (task: todoType) => {
+  const toggleTodo = (task: TodoData) => {
     setTodos((prev) =>
       prev.map((t) =>
         t.content === task.content ? { ...t, done: !t.done } : t
@@ -52,29 +44,24 @@ export const App = () => {
 
   const onFilterNotes = useCallback(
     (query: string) => {
-      console.log({ todos, query });
       const filteredNotes = todos.filter((cur) => cur.content.includes(query));
-      console.log({ filteredNotes });
       setProcecedTodos(filteredNotes);
     },
     [todos]
   );
 
   useEffect(() => {
-    const data = localStorage.getItem("TasksList");
+    const data = localStorage.getItem("ToDoList");
     if (data) {
       setTodos(JSON.parse(data));
     }
   }, []);
 
   useEffect(() => {
-    localStorage.setItem("TasksList", JSON.stringify(todos));
+    localStorage.setItem("ToDoList", JSON.stringify(todos));
   }, [todos]);
 
   useEffect(() => {
-    // setProcecedTodos(todos);
-    console.log("useEffect query");
-    console.log({ query });
     onFilterNotes(query);
   }, [query, onFilterNotes]);
 
@@ -195,15 +182,19 @@ export const App = () => {
               <p>There is no todos with the query you wrote</p>
             )}
             <TodoItemList
-              todo={procecedTodos}
+              todos={procecedTodos}
+              allTodos={todos}
               toggleTodo={toggleTodo}
               showCompleted={false}
+              fnAllTodos={setTodos}
             />
             {showCompleted && (
               <TodoItemList
-                todo={procecedTodos}
+                todos={procecedTodos}
+                allTodos={todos}
                 toggleTodo={toggleTodo}
                 showCompleted={showCompleted}
+                fnAllTodos={setTodos}
               />
             )}
           </section>
