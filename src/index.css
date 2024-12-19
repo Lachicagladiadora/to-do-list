@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
   --task: "Annie Use Your Telescope", cursive;
   --footer: "Comforter", cursive;
