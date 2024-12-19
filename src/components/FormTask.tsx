@@ -1,8 +1,8 @@
 import { CSSProperties, useCallback } from "react";
 import { Input } from "./Input";
-import { Button } from "./Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheck } from "@fortawesome/free-solid-svg-icons";
+import { faCheck, faRightLong } from "@fortawesome/free-solid-svg-icons";
+import { Button } from "../outer/atomic/atoms/Button";
 
 type FormTaskProps = {
   createNewTodo: (newTodoValue: string) => void;
@@ -42,6 +42,7 @@ export const FormTask = ({
         gap: "10px",
         ...style,
       }}
+      onSubmit={onSubmit}
     >
       <Input
         value={newTodoValue}
@@ -54,11 +55,10 @@ export const FormTask = ({
       />
       <Button
         title="Save To-Do"
-        onClick={onSubmit}
-        ariaLabel="Save To-Do"
-        classButton="button-form"
+        aria-label="Button save To-Do"
+        className="p-2 text-3xl rounded-full md:p-3 md:text-5xl"
       >
-        <FontAwesomeIcon icon={faCheck} className="button-form-icon" />
+        <FontAwesomeIcon icon={faRightLong} />
       </Button>
     </form>
   );

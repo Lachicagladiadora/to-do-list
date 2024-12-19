@@ -11,9 +11,10 @@ import {
 import { FormTask } from "./components/FormTask";
 import { TodoItemList } from "./components/TodoItemList";
 import { Footer } from "./components/Footer";
-import { Button } from "./components/Button";
+// import { Button } from "./components/Button";
 import { TodoData } from "./types";
 import { getId } from "./utilities";
+import { Button } from "./outer/atomic/atoms/Button";
 
 export const App = () => {
   const [todos, setTodos] = useState<TodoData[]>([]);
@@ -137,25 +138,23 @@ export const App = () => {
             <div className="container-buttons-options">
               <Button
                 onClick={() => setShowCompleted((prev) => !prev)}
-                title={
+                title={showCompleted ? "Hide completed" : "Show completed"}
+                aria-label={
                   showCompleted
-                    ? "Hide completed todos"
-                    : "Show completed todos"
+                    ? "Button hide completed"
+                    : "Button show completed"
                 }
-                ariaLabel={
-                  showCompleted
-                    ? "Hide completed todos"
-                    : "Show completed todos"
-                }
-                classButton="eye-button"
+                className="p-2 rounded-full text-lg md:text-2xl md:p-3"
+                // className="eye-button"
               >
                 <FontAwesomeIcon icon={showCompleted ? faEyeSlash : faEye} />{" "}
               </Button>
               <Button
                 onClick={removeAllCompletedTodos}
-                title="Delete all completed"
-                ariaLabel="Delete all completed"
-                classButton="trash-button"
+                title="Delete completed"
+                aria-label="Button delete completed"
+                className="p-2 rounded-full text-lg md:text-2xl md:p-3"
+                // className="trash-button"
               >
                 <FontAwesomeIcon icon={faTrashAlt} />
               </Button>

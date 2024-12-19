@@ -59,13 +59,13 @@ header {
   color: var(--aquamarine-light);
 }
 
-.button-form {
+/* .button-form {
   color: var(--aquamarine-darker);
-}
+} */
 
-.button-form-icon {
+/* .button-form-icon {
   background: transparent;
-}
+} */
 
 /* to-dos options */
 .options-container {
@@ -133,22 +133,18 @@ footer {
   color: var(--aquamarine);
 }
 
-.edit-button {
-  /* padding: 4px 6px; */
+/* .edit-button {
   font-size: 15px;
   border-radius: 20px;
-  /* position: absolute; */
-  /* top: -15px; */
-  /* right: -5px; */
   display: none;
   border: none;
   background: transparent;
   color: var(--aquamarine);
-}
+} */
 
-.edit-button:hover {
+/* .edit-button:hover {
   background: var(--aquamarine-darker);
-}
+} */
 
 .to-do-item:hover + .edit-button {
   display: block;
@@ -163,14 +159,11 @@ footer {
   border: solid 2px var(--aquamarine-dark);
 }
 
-.form-edit-button {
+/* .form-edit-button {
   font-size: 20px;
   border-radius: 20px;
   padding: 4px 6px;
-  /* position: absolute;
-  top: -10px;
-  right: 10px; */
-}
+} */
 
 @media screen and (max-width: 600px) {
   .title {
@@ -187,11 +180,11 @@ footer {
     padding: 6px 12px;
     border-radius: 24px;
   }
-  .button-form {
+  /* .button-form {
     font-size: 24px;
     padding: 4px 8px;
     border-radius: 22px;
-  }
+  } */
   .options-container {
     flex-direction: column;
   }
@@ -203,7 +196,7 @@ footer {
     justify-content: end;
     gap: 10px;
   }
-  .eye-button {
+  /* .eye-button {
     font-size: 18px;
     padding: 6px;
     border-radius: 34px;
@@ -212,7 +205,7 @@ footer {
     font-size: 18px;
     padding: 6px 8px;
     border-radius: 32px;
-  }
+  } */
   footer {
     padding: 18px 0px;
     font-size: 18px;
@@ -237,14 +230,14 @@ footer {
     padding: 10px 16px;
     border-radius: 30px;
   }
-  .button-form {
+  /* .button-form {
     font-size: 36px;
     padding: 6px 8px;
     border-radius: 30px;
     display: flex;
     justify-items: center;
     align-items: center;
-  }
+  } */
   .options-container {
     flex-direction: row;
   }
@@ -255,7 +248,7 @@ footer {
     width: auto;
     gap: 28px;
   }
-  .eye-button {
+  /* .eye-button {
     font-size: 20px;
     padding: 6px;
     border-radius: 32px;
@@ -264,7 +257,7 @@ footer {
     font-size: 20px;
     padding: 6px 8px;
     border-radius: 32px;
-  }
+  } */
   footer {
     padding: 22px 0px;
     font-size: 22px;
@@ -289,11 +282,11 @@ footer {
     padding: 14px 20px;
     border-radius: 36px;
   }
-  .button-form {
+  /* .button-form {
     font-size: 40px;
     padding: 8px 10px;
     border-radius: 34px;
-  }
+  } */
   .options-text {
     font-size: 28px;
   }
@@ -301,7 +294,7 @@ footer {
     width: auto;
     gap: 40px;
   }
-  .eye-button {
+  /* .eye-button {
     font-size: 20px;
     padding: 12px 12px;
     border-radius: 32px;
@@ -310,7 +303,7 @@ footer {
     font-size: 20px;
     padding: 12px 14px;
     border-radius: 32px;
-  }
+  } */
   footer {
     padding: 24px 0px;
     font-size: 24px;
