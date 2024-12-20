@@ -1,5 +1,5 @@
 import { CSSProperties, useCallback } from "react";
-import { Input } from "./Input";
+import { Input } from "../outer/atomic/atoms/Input";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faRightLong } from "@fortawesome/free-solid-svg-icons";
 import { Button } from "../outer/atomic/atoms/Button";
@@ -35,14 +35,15 @@ export const FormTask = ({
   return (
     <form
       style={{
-        width: "100%",
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center",
-        gap: "10px",
+        //   width: "100%",
+        //   display: "flex",
+        //   justifyContent: "space-between",
+        //   alignItems: "center",
+        //   gap: "10px",
         ...style,
       }}
       onSubmit={onSubmit}
+      className="w-full flex items-center justify-center gap-3"
     >
       <Input
         value={newTodoValue}
@@ -52,6 +53,7 @@ export const FormTask = ({
           return !newValue ? setNewTodoValue("") : setNewTodoValue(newValue);
         }}
         placeholder="Write a new to-do"
+        className="text-2xl rounded-full md:text-4xl"
       />
       <Button
         title="Save To-Do"

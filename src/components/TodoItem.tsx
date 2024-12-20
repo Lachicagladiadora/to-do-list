@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import { Button } from "./Button";
 import { faPen, faRightLong, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { Dispatch, FormEvent, useState } from "react";
-import { Input } from "./Input";
+import { Input } from "../outer/atomic/atoms/Input";
 import { TodoData } from "../types";
 import { Button } from "../outer/atomic/atoms/Button";
 
@@ -63,12 +63,13 @@ export const TodoItem = ({
             type="checkbox"
             checked={todo.done}
             onChange={() => toggleTodo(todo)}
-            style={{
-              accentColor: `${todo.done ? "#48c0ac" : "#2b2a2a"}`,
-              width: "20px",
-              height: "20px",
-              display: "none",
-            }}
+            className="text-base"
+            // style={{
+            //   accentColor: `${todo.done ? "#48c0ac" : "#2b2a2a"}`,
+            //   width: "20px",
+            //   height: "20px",
+            //   display: "none",
+            // }}
           />
           {todo.content}
         </label>
