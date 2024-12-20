@@ -1,7 +1,7 @@
 import { CSSProperties, useCallback } from "react";
 import { Input } from "../outer/atomic/atoms/Input";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheck, faRightLong } from "@fortawesome/free-solid-svg-icons";
+import { faRightLong } from "@fortawesome/free-solid-svg-icons";
 import { Button } from "../outer/atomic/atoms/Button";
 
 type FormTaskProps = {
@@ -34,14 +34,7 @@ export const FormTask = ({
 
   return (
     <form
-      style={{
-        //   width: "100%",
-        //   display: "flex",
-        //   justifyContent: "space-between",
-        //   alignItems: "center",
-        //   gap: "10px",
-        ...style,
-      }}
+      style={{ ...style }}
       onSubmit={onSubmit}
       className="w-full flex items-center justify-center gap-3"
     >

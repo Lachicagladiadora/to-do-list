@@ -11,7 +11,6 @@ import {
 import { FormTask } from "./components/FormTask";
 import { TodoItemList } from "./components/TodoItemList";
 import { Footer } from "./components/Footer";
-// import { Button } from "./components/Button";
 import { TodoData } from "./types";
 import { getId } from "./utilities";
 import { Button } from "./outer/atomic/atoms/Button";
@@ -145,7 +144,6 @@ export const App = () => {
                     : "Button show completed"
                 }
                 className="p-2 rounded-full text-lg md:text-2xl md:p-3"
-                // className="eye-button"
               >
                 <FontAwesomeIcon icon={showCompleted ? faEyeSlash : faEye} />{" "}
               </Button>
@@ -154,7 +152,6 @@ export const App = () => {
                 title="Delete completed"
                 aria-label="Button delete completed"
                 className="p-2 rounded-full text-lg md:text-2xl md:p-3"
-                // className="trash-button"
               >
                 <FontAwesomeIcon icon={faTrashAlt} />
               </Button>
