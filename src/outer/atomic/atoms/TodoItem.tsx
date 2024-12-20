@@ -3,9 +3,9 @@ import { faCheckCircle } from "@fortawesome/free-solid-svg-icons/faCheckCircle";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen, faRightLong, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { Dispatch, FormEvent, useState } from "react";
-import { Input } from "../outer/atomic/atoms/Input";
-import { TodoData } from "../types";
-import { Button } from "../outer/atomic/atoms/Button";
+import { Input } from "./Input";
+import { TodoData } from "../../../types";
+import { Button } from "./Button";
 
 type TodoProps = {
   todo: TodoData;
@@ -35,31 +35,31 @@ export const TodoItem = ({ todo, toggleTodo, fnAllTodos }: TodoProps) => {
 
   return (
     <li
-      style={{
-        width: "100%",
-        listStyle: "none",
-        position: "relative",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
-      }}
       key={todo.id}
+      className="w-full list-none relative flex items-center justify-between gap-3 rounded-xl group/todo hover:bg-dark"
+      // style={{
+      //   width: "100%",
+      //   listStyle: "none",
+      //   position: "relative",
+      //   display: "flex",
+      //   alignItems: "center",
+      //   justifyContent: "space-between",
+      // }}
     >
       {!showEditForm && (
-        <label className="to-do-item">
-          <FontAwesomeIcon icon={faCircle} className="non-check" />
-          <FontAwesomeIcon icon={faCheckCircle} className="check" />
+        <label
+          // className="to-do-item"
+          className="w-full flex items-center  gap-4 px-4 py-2 group-hover/todo:bg-transparent"
+        >
+          <FontAwesomeIcon
+            icon={todo.done ? faCheckCircle : faCircle}
+            className="text-teal-light"
+          />
           <input
             type="checkbox"
             checked={todo.done}
             onChange={() => toggleTodo(todo)}
-            className="text-base"
-            // style={{
-            //   accentColor: `${todo.done ? "#48c0ac" : "#2b2a2a"}`,
-            //   width: "20px",
-            //   height: "20px",
-            //   display: "none",
-            // }}
+            className="hidden"
           />
           {todo.content}
         </label>
@@ -82,7 +82,11 @@ export const TodoItem = ({ todo, toggleTodo, fnAllTodos }: TodoProps) => {
 
       <Button
         title="Edit to-do"
-        className="p-4 rounded-full text-base text-teal md:text-lg md:p-2 border-none bg-transparent"
+        className={`p-4 rounded-full text-base ${
+          currentId === todo.id && showEditForm
+            ? "text-teal"
+            : "text-teal-dark hover:bg-teal-darker group-hover/todo:text-teal-light"
+        } md:text-lg md:p-2 border-none bg-transparent`}
         onClick={() => onShowEditForm(todo.id)}
       >
         <FontAwesomeIcon

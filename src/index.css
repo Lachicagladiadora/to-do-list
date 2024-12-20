@@ -87,16 +87,16 @@ footer {
 }
 
 /* to-dos */
-.to-do-item {
+/* .to-do-item {
   width: 100%;
   display: flex;
   align-items: center;
   gap: 10px;
   padding: 12px 8px;
   border-radius: 24px;
-}
+} */
 
-.to-do-item .check {
+/* .to-do-item .check {
   display: none;
 }
 
@@ -110,16 +110,16 @@ footer {
 
 .to-do-item:has(:checked) .check {
   display: inline;
-}
+} */
 
-.check {
+/* .check {
   color: var(--aquamarine);
-}
+} */
 
-.form-todo {
+/* .form-todo {
   font-size: 20px;
   border: solid 2px var(--aquamarine-dark);
-}
+} */
 
 @media screen and (max-width: 600px) {
   .title {

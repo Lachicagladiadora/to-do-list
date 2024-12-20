@@ -1,7 +1,7 @@
 import { Dispatch } from "react";
 import { TodoData } from "../types";
 import { getId } from "../utilities";
-import { TodoItem } from "./TodoItem";
+import { TodoItem } from "../outer/atomic/atoms/TodoItem";
 
 type TodoItemListProps = {
   todos: TodoData[];
