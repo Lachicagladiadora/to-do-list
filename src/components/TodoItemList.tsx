@@ -1,4 +1,4 @@
-import { Dispatch } from "react";
+import { Dispatch, useState } from "react";
 import { TodoData } from "../types";
 import { getId } from "../utilities";
 import { TodoItem } from "../outer/atomic/atoms/TodoItem";
@@ -18,6 +18,9 @@ export const TodoItemList = ({
   showCompleted = false,
   fnAllTodos,
 }: TodoItemListProps) => {
+  const [currentId, setCurrentId] = useState("000000");
+  // const [showEditForm, setShowEditForm] = useState(false);
+
   const todoUnique = (doneValue: boolean) => {
     return (
       <ul
@@ -32,11 +35,17 @@ export const TodoItemList = ({
           .filter((todo: { done: boolean }) => todo.done === doneValue)
           .map((todo: { content: string; done: boolean; id: string }) => (
             <TodoItem
+              key={todo.id}
               todo={todo}
-              key={getId()}
+              // key={getId()}
               toggleTodo={toggleTodo}
-              allTodos={todos}
+              // allTodos={todos}
+              // showEditForm={showEditForm}
+              // fnShowEditForm={setShowEditForm}
+              currentId={currentId}
+              fnCurrentId={setCurrentId}
               fnAllTodos={fnAllTodos}
+              onClick={() => setCurrentId(todo.id)}
             />
           ))}
       </ul>

@@ -2,7 +2,7 @@ import { faCircle } from "@fortawesome/free-regular-svg-icons";
 import { faCheckCircle } from "@fortawesome/free-solid-svg-icons/faCheckCircle";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen, faRightLong, faXmark } from "@fortawesome/free-solid-svg-icons";
-import { Dispatch, FormEvent, useState } from "react";
+import { ComponentPropsWithoutRef, Dispatch, FormEvent, useState } from "react";
 import { Input } from "./Input";
 import { TodoData } from "../../../types";
 import { Button } from "./Button";
@@ -10,19 +10,39 @@ import { Button } from "./Button";
 type TodoProps = {
   todo: TodoData;
   toggleTodo: (todo: TodoData) => void;
+  currentId: string;
+  // showEditForm: boolean;
+  // fnShowEditForm: Dispatch<React.SetStateAction<boolean>>;
+  fnCurrentId: Dispatch<React.SetStateAction<string>>;
   fnAllTodos: Dispatch<React.SetStateAction<TodoData[]>>;
-};
+} & ComponentPropsWithoutRef<"li">;
 
-export const TodoItem = ({ todo, toggleTodo, fnAllTodos }: TodoProps) => {
-  const [currentId, setCurrentId] = useState("000000");
+export const TodoItem = ({
+  todo,
+  toggleTodo,
+  currentId,
+  // fnCurrentId,
+  // showEditForm,
+  // fnShowEditForm,
+  fnAllTodos,
+  ...props
+}: TodoProps) => {
   const [showEditForm, setShowEditForm] = useState(false);
   const [newValue, setNewValue] = useState(todo.content);
 
-  const onShowEditForm = (id: string) => {
-    setCurrentId(id);
-    if (id !== todo.id) return;
-    setShowEditForm((p) => !p);
-  };
+  // const onShowEditForm = (id: string) => {
+  //   // if (currentId) setShowEditForm(false);
+  //   setShowEditForm((p) => !p);
+  //   // if (id !== currentId) setShowEditForm(false);
+  //   // if (id === currentId) {
+  //   //   setShowEditForm((p) => !p);
+  //   //   // setShowEditForm(false);
+  //   // }
+  //   // fnCurrentId(id);
+  //   // setShowEditForm(true);
+  //   // if (id !== todo.id) setShowEditForm(false);
+  //   // setShowEditForm(false);
+  // };
 
   const updateTodo = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -33,24 +53,20 @@ export const TodoItem = ({ todo, toggleTodo, fnAllTodos }: TodoProps) => {
     setShowEditForm(false);
   };
 
+  // useEffect(() => {
+  //   if (currentId !== todo.id) fnShowEditForm(false);
+  // }, [showEditForm, currentId, todo.id]);
+
   return (
     <li
-      key={todo.id}
-      className="w-full list-none relative flex items-center justify-between gap-3 rounded-xl group/todo hover:bg-dark"
-      // style={{
-      //   width: "100%",
-      //   listStyle: "none",
-      //   position: "relative",
-      //   display: "flex",
-      //   alignItems: "center",
-      //   justifyContent: "space-between",
-      // }}
+      {...props}
+      // key={todo.id}
+      className={`w-full list-none relative px-4 py-2 flex items-center justify-between gap-3 rounded-xl group/todo hover:bg-dark ${
+        showEditForm ? "flex-row-reverse" : "flex-row"
+      }`}
     >
       {!showEditForm && (
-        <label
-          // className="to-do-item"
-          className="w-full flex items-center  gap-4 px-4 py-2 group-hover/todo:bg-transparent"
-        >
+        <label className="w-full flex items-center gap-4 group-hover/todo:bg-transparent">
           <FontAwesomeIcon
             icon={todo.done ? faCheckCircle : faCircle}
             className="text-teal-light"
@@ -64,8 +80,11 @@ export const TodoItem = ({ todo, toggleTodo, fnAllTodos }: TodoProps) => {
           {todo.content}
         </label>
       )}
-      {showEditForm && (
-        <form className="to-do-item form-todo" onSubmit={(e) => updateTodo(e)}>
+      {currentId === todo.id && showEditForm && (
+        <form
+          className="w-full flex items-center gap-2"
+          onSubmit={(e) => updateTodo(e)}
+        >
           <Input
             value={newValue}
             onChange={(e) => setNewValue(e.target.value)}
@@ -82,12 +101,14 @@ export const TodoItem = ({ todo, toggleTodo, fnAllTodos }: TodoProps) => {
 
       <Button
         title="Edit to-do"
-        className={`p-4 rounded-full text-base ${
+        className={`grid place-items-center ${
+          currentId === todo.id && showEditForm ? "px-[6px] py-1" : "p-[6px]"
+        } rounded-full text-lg ${
           currentId === todo.id && showEditForm
-            ? "text-teal"
-            : "text-teal-dark hover:bg-teal-darker group-hover/todo:text-teal-light"
+            ? "text-teal-lighter"
+            : "text-teal-lighter/20 hover:bg-teal-darker hover:text-dark group-hover/todo:text-teal-lighter "
         } md:text-lg md:p-2 border-none bg-transparent`}
-        onClick={() => onShowEditForm(todo.id)}
+        onClick={() => setShowEditForm((p) => !p)}
       >
         <FontAwesomeIcon
           icon={currentId === todo.id && showEditForm ? faXmark : faPen}
